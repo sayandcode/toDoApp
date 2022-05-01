@@ -1,0 +1,31 @@
+@import 'config.scss';
+
+body{
+    //default font
+    font-family: 'Poppins', sans-serif;
+    background-color: $bgC-light;
+
+    display: grid;
+    grid-template-columns: minmax(auto, 300px) 1fr;
+    grid-template-rows: min-content 1fr;
+    height: 100vh;
+    grid-template-areas: 
+        "navMenu logo"
+        "navMenu main";
+}
+
+.logo{
+    font-family: 'Libre Bodoni', serif;
+    font-size: 3rem;
+    padding: 0.5em 1em;
+
+    grid-area: logo;
+}
+
+nav{
+    grid-area: navMenu;
+}
+
+@import './navStyling.scss'
+
+

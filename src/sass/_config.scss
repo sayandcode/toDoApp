@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,700;1,500&family=Poppins:ital,wght@0,400;0,600;1,200&display=swap');
+/* AVAILABLE FONT STYLES */
+//Poppins   [font-family: 'Poppins', sans-serif;]
+    //200 italic
+    //400
+    //600
+//Libre Bodoni  [font-family: 'Libre Bodoni', serif;]
+    //500 italic
+    //700
+
+@import './icons.scss';
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+$bgC-saturated: #BFCAD3;
+$bgC-light: #E7EBEE;
+$darkColor: #353535;
+$lightColor: white;
