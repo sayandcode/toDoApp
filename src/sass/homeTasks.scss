@@ -59,4 +59,9 @@ main h2{
     }
 }
 
+h2#home2allTasks{
+    cursor: pointer;
+    text-align: right;
+}
+
 @import 'homeProjectCards.scss'

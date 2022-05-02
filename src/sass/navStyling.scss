@@ -16,13 +16,14 @@ nav{
     .home::before{
         content: '\f015';
     }
-    .projects{
-        &::before{
-            content: '\f02d';
-        }
+    .projects::before{
+        content: '\f02d';
+    }
+    .allTasks::before{
+        content: '\f304';
     }
     
-    .home,.projects{
+    .home,.projects,.allTasks{
         cursor: pointer;
     }
     
@@ -54,6 +55,7 @@ nav{
     
     #newProjectfromNav{
         width: 60%;
+        margin-left: 1em;
         padding: 0.5em 0.5em;
     
         border: none;
