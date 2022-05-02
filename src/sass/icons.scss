@@ -1,9 +1,9 @@
 $icon-width:1.5em;
 
-.icon::before,
+.icon::before,.icon::after,
 .projectSlab::marker,
-.hoverOptions::after
-{
+.hoverOptions::after,
+.task::before {
     display: inline-block;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
@@ -13,12 +13,6 @@ $icon-width:1.5em;
     text-align: center;
 }
 
-.task::before{
-    display: inline-block;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
+.task::before{    
     font: var(--fa-font-regular);
-    font-size: 1em;
-    width: $icon-width;
-    text-align: center;
 }

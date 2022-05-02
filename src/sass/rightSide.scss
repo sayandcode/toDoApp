@@ -1,0 +1,69 @@
+main h2{
+    margin-block: 0 0.25em;
+    &:not(:first-of-type){
+        margin-top: 1em;
+    }
+
+}
+
+.taskList{
+    background-color: $lightColor;
+    border-radius: $standard-border-radius;
+    padding: 1em;
+    list-style: none;
+}
+
+.task{
+    padding-block: 0.5em;
+    &:not(&:last-of-type){
+        border-bottom: 2px solid $bgC-saturated;
+    }
+    &::before{
+        content: '\f111';
+    }
+    &:hover::before{
+        content: '\f058';
+        cursor: pointer;
+    }
+    
+    &.checked::before{
+        font: var(--fa-font-solid);
+        content: '\f058';
+    }
+
+    position: relative;
+    .deleteBtn{
+        list-style-type: none;
+        position: absolute;
+        right: 0;
+        margin-inline: 1em;
+        color: lighten($darkColor, $amount: 20%);
+        cursor: pointer;
+        display: none;
+        &:hover{
+            transition: color 0.1s;
+            color: red;
+        }
+    }
+    &:hover .deleteBtn{
+        display: inline-block;
+    }
+
+    .deadline{
+        font-style: italic;
+        margin-left: 1em;
+        display: none;
+    }
+    &:hover .deadline{
+        display: inline;
+    }
+}
+
+.navigate2diffSection{
+    cursor: pointer;
+    &::after{
+        content: '\f101';
+    }
+}
+
+@import 'homeTasks.scss';
