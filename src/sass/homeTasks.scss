@@ -8,7 +8,7 @@ main h2{
 
 .taskList{
     background-color: $lightColor;
-    border-radius: 15px;
+    border-radius: $standard-border-radius;
     padding: 1em;
     list-style: none;
 }
@@ -59,3 +59,4 @@ main h2{
     }
 }
 
+@import 'homeProjectCards.scss'

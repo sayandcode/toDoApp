@@ -12,6 +12,7 @@ body{
     grid-template-areas: 
         "navMenu logo"
         "navMenu main";
+    overflow-y: hidden;
 }
 
 .logo{
@@ -28,9 +29,29 @@ nav{
 
 .rightSide{
     grid-area: main;
-    width: 90%;
-    margin: 0 auto;
+    padding: 0 5%;
+    padding-bottom: 2rem;
+    overflow-y: auto;
 }
+
+/* SCROLLBAR */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #fec600 #000;
+}
+*::-webkit-scrollbar {
+  width: 14px;
+}
+*::-webkit-scrollbar-track {
+    background-color: $bgC-saturated;
+    border-radius: $standard-border-radius;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: $lightColor;
+    border: 2px solid $bgC-light;
+    border-radius: 5px;
+}
+/* SCROLLBAR */
 
 @import 'navStyling.scss';
 @import 'contextMenu.scss';
