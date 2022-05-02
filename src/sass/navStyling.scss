@@ -1,12 +1,15 @@
 nav{
     background-color: $lightColor;
     padding-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
     
-    section{
+    &>span,section{
         font-size: 1.5rem;
         font-weight: 600;
         margin-left: 2em;
-        margin-block: 0.5em;
 
         &>ul{
             margin-left: 1em;
