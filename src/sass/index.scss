@@ -11,7 +11,7 @@ body{
     height: 100vh;
     grid-template-areas: 
         "navMenu logo"
-        "navMenu main";
+        "navMenu rightSide";
     overflow-y: hidden;
 }
 
@@ -19,6 +19,8 @@ body{
     font-family: 'Libre Bodoni', serif;
     font-size: 3rem;
     padding: 0.5em 1em;
+    background-color: scale-color($bgC-light, $alpha: -30%);
+    z-index: 3;
 
     grid-area: logo;
 }
@@ -28,9 +30,10 @@ nav{
 }
 
 .rightSide{
-    grid-area: main;
-    padding: 0 5%;
-    padding-bottom: 2rem;
+    z-index: 2;
+    grid-area: 1/2/-1/-1;
+    padding-inline: 5%;
+    padding-block: (3rem*(1.25+1)) 2rem;
     overflow-y: auto;
 }
 
