@@ -43,16 +43,18 @@
         }
     }
 
-    .newProjectCard{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: scale-color($bgC-saturated, $alpha: -20%);
-        border-radius: $standard-border-radius;
-        transition: background-color 0.1s;
-        &:hover{
-            background-color: scale-color($bgC-saturated, $lightness: 40% ,$alpha: -20%);
-            cursor: pointer;
-        }
+}
+.newProjectCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: scale-color($bgC-saturated, $alpha: -20%);
+    border-radius: $standard-border-radius;
+    transition: background-color 0.1s;
+    &:hover{
+        background-color: scale-color($bgC-saturated, $lightness: 40% ,$alpha: -20%);
+        cursor: pointer;
+        border: 2px solid $lightColor;
+        box-sizing: border-box;
     }
 }
