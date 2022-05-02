@@ -1,4 +1,4 @@
-@import 'config.scss';
+@import './config.scss';
 
 body{
     //default font
@@ -26,7 +26,14 @@ nav{
     grid-area: navMenu;
 }
 
-@import './navStyling.scss';
-@import 'contextMenu';
+.rightSide{
+    grid-area: main;
+    width: 90%;
+    margin: 0 auto;
+}
+
+@import 'navStyling.scss';
+@import 'contextMenu.scss';
+@import 'homeTasks.scss'
 
 

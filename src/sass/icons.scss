@@ -12,3 +12,13 @@ $icon-width:1.5em;
     width: $icon-width;
     text-align: center;
 }
+
+.task::before{
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font: var(--fa-font-regular);
+    font-size: 1em;
+    width: $icon-width;
+    text-align: center;
+}

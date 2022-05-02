@@ -16,4 +16,6 @@
     top: 50%;
     right: 0 + $icon-width/2;
     transform: translateX(100%);
+
+    display: none;  //remove this later
 }
