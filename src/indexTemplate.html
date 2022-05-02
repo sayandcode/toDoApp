@@ -11,12 +11,17 @@
     <h1 class="logo">To Do App</h1>
     <nav>
         <section class="home icon">Home</section>
-        <section class="projects icon">
-                Projects
+        <section>
+            <span class="projects icon">Projects</span>
             <ul>
-                <li class="projectSlab hoverOptions">First</li>
-                <li class="projectSlab hoverOptions">Second</li>
-                <li class="projectSlab hoverOptions">Third</li>
+                <li class="projectSlab hoverOptions"><span class="projectName">First</span></li>
+                <li class="projectSlab hoverOptions"><span class="projectName">Second</span></li>
+                <li class="projectSlab hoverOptions"><span class="projectName">Third</span>                    <ul class="contextMenu">
+                        <li>Edit Project</li>
+                        <li>Rename</li>
+                        <li>Delete Project</li>
+                    </ul>
+                </li>
             </ul>
             <input type="text" id="newProjectfromNav" placeholder="Add new project...➕" maxlength="30"></input>
         </section>

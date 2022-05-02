@@ -8,61 +8,71 @@ nav{
         margin-left: 2em;
         margin-block: 0.5em;
 
-        ul{
+        &>ul{
             margin-left: 1em;
-            li.projectSlab{
-                font-size: 1rem;
-                font-weight: 400;
-                margin-block: 0.5em;
-                margin-left: 1em;
-                padding-left: 1em;
-                width: 80%;
-            }
-        }
-
-        &.home::before{
-            content: '\f015';
-        }
-        &.projects{
-            &::before{
-                content: '\f02d';
-            }
-            li::marker{
-                content: '\f1fd';
-            }
-        }
-
-        #newProjectfromNav{
-            width: 60%;
-            padding: 0.5em 0.5em;
-
-            border: none;
-            border-radius: 10px;
-            outline: none;
-            
-            background-color: $lightColor;
-            transition: background-color 0.4s;
-            &:hover{
-                background-color: $bgC-light;
-            }
-            &:focus{
-                background-color: $lightColor;
-            }
-
-            font-size: 1rem;
-            font-weight: 200;
-            &::placeholder{
-                font-style: italic;
-            }
         }
     }
-    .projectSlab{
-        position: relative;
-        &:hover::after{
-            content: '\f142';
-            position: absolute;
-            right: 0;
-            cursor: pointer;
-        }
+}
+
+.home::before{
+    content: '\f015';
+}
+.projects{
+    &::before{
+        content: '\f02d';
+    }
+}
+
+.home,.projects{
+    cursor: pointer;
+}
+
+.projectSlab{
+    font-size: 1rem;
+    font-weight: 400;
+    margin-block: 0.5em;
+    margin-left: 1em;
+    padding-left: 1em;
+    width: 80%;
+    cursor: default;
+
+    &::marker{
+        content: '\f1fd';
+    }
+    
+    .projectName{
+        cursor: pointer;
+    }
+
+    position: relative;
+    &:hover::after,&:active::after{
+        content: '\f142';
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+    }
+}
+
+#newProjectfromNav{
+    width: 60%;
+    padding: 0.5em 0.5em;
+
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    
+    background-color: $lightColor;
+    transition: background-color 0.4s;
+    &:hover{
+        background-color: $bgC-light;
+    }
+    &:focus{
+        background-color: $lightColor;
+    }
+
+    font-size: 1rem;
+    font-weight: 200;
+    &::placeholder{
+        font-style: italic;
     }
 }

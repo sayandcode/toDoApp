@@ -1,0 +1,19 @@
+.contextMenu{
+    display: block;
+    background-color: $lightColor;
+    border: 2px solid $bgC-saturated;
+    border-radius: 10px;
+    cursor: default;
+    li{
+        list-style: none;
+        padding: 0.5em 1em;
+        &:hover{
+            background-color: $bgC-light;
+        }
+    }
+
+    position:absolute;
+    top: 50%;
+    right: 0 + $icon-width/2;
+    transform: translateX(100%);
+}
