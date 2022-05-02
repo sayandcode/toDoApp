@@ -10,18 +10,9 @@
         box-sizing: border-box;
         padding: 1em;
 
-        position: relative;
-        &::after{
-            content: '\f142';
-            position: absolute;
+        &::after{   //ellipses aka hoverOptions
             top: 2em;
             right: 1em;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.1s;
-        }
-        &:hover::after{
-            opacity: 1;
         }
 
         display: grid;

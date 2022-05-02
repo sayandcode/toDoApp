@@ -16,3 +16,13 @@ $icon-width:1.5em;
 .task::before{    
     font: var(--fa-font-regular);
 }
+
+.hoverOptions{
+    position: relative;
+    &:hover::after,&:active::after{
+        content: '\f142';
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+    }
+}

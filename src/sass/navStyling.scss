@@ -46,14 +46,6 @@ nav{
         .projectName{
             cursor: pointer;
         }
-    
-        position: relative;
-        &:hover::after,&:active::after{
-            content: '\f142';
-            position: absolute;
-            right: 0;
-            cursor: pointer;
-        }
     }
     
     #newProjectfromNav{
