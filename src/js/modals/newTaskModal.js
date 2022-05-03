@@ -1,15 +1,18 @@
-import {createTaskFromInputs} from '../formStuff.js'
-import Task from '../tasks&Projects/tasks.js'
+import newTaskModalTemplate from '../../fullRenders/modalNewTask.html';
+import template2Node from '../template2Node.js';
+
+import {createTaskFromInputs} from '../formStuff.js';
+import Task from '../tasks&Projects/tasks.js';
+// import {renderRightSide} from '../UIStuff.js';
 
 function newTaskModal(){
     //initialize
-    const newTaskModal=document.getElementById('newTaskTemplate').content.cloneNode(true);
+    const newTaskModal=template2Node(newTaskModalTemplate);
     document.body.insertBefore(newTaskModal, document.body.firstChild );
 
     //cache DOM
     const modal=document.querySelector('.modalBGOverlay');
     const form=modal.querySelector('form');
-    const submitBtn=document.querySelector('.modal .submitBtn');
     const cancelBtn=document.querySelector('.modal .cancelBtn');
 
     //listeners
@@ -34,6 +37,7 @@ function newTaskModal(){
         const userInputs=createTaskFromInputs(event);
         new Task(...userInputs);
         closeModal();
+        // renderRightSide();
     }
 }
 

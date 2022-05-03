@@ -8,7 +8,9 @@ module.exports={
     },
     output:{
         path:path.resolve(__dirname,'dist'),
-        filename:'[name].js'
+        filename:'[name].js',
+        assetModuleFilename: 'images/[hash][ext][query]',
+        clean:true
     },
     devServer:{
         static:path.resolve(__dirname,'dist'),
@@ -21,6 +23,10 @@ module.exports={
             {
                 test:/\.scss$/,
                 use:['style-loader','css-loader','sass-loader']
+            },
+            {
+                test: /\.html$/i,
+                loader: "html-loader",
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
