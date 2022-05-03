@@ -84,22 +84,17 @@
         <div class="newProjectCard">New Project ➕</div>
     </main>
     <div class="modalBGOverlay">
-        <div class="newProjectDetails modal">
-            <label for="projName">Project Name:<input type="text" name="projName" id="projName" maxlength="30"></label>
-            
-            <fieldset class="iconSelector">
-                <legend>Choose an Icon:</legend>
-                <input type="radio" name="iconSelector" id="partyIcon">
-                <label class="icon" for="partyIcon"></label>
-                <input type="radio" name="iconSelector" id="birthdayIcon">
-                <label class="icon" for="birthdayIcon"></label>
-                <input type="radio" name="iconSelector" id="schoolIcon">
-                <label class="icon" for="schoolIcon"></label>
-                <input type="radio" name="iconSelector" id="workIcon">
-                <label class="icon" for="workIcon"></label>
-                <input type="radio" name="iconSelector" id="wrenchIcon">
-                <label class="icon" for="wrenchIcon"></label>
-            </fieldset>
+        <div class="modal">
+            <label for="taskName">Task Name:<input class="inputBox" type="text" name="taskName" id="taskName" maxlength="30"></label>
+            <label for="taskDateTime">Task Date:<input class="inputBox" type="datetime-local" name="taskDateTime" id="taskDateTime"></label>
+            <label for="chooseProject">Choose a Project(Optional)
+                <select class="inputBox" name="chooseProject" id="chooseProject">
+                    <option value="None">None</option>
+                    <option value="First">First</option>
+                    <option value="Second">Second</option>
+                    <option value="Third">Third</option>
+                </select>
+            </label>
             <div class="btnWrapper">
                 <button class="submitBtn btnSmall">Submit</button>
                 <button class="cancelBtn btnSmall">Cancel</button>

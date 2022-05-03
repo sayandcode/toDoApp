@@ -1,0 +1,56 @@
+.iconSelector{
+    border-radius: $standard-border-radius;
+    border: 2px solid $darkColor;
+    padding: 1rem 2rem;
+    height: 150px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1rem;
+    
+    input[type='radio']{
+            display: none;
+    }
+        
+    label{
+        flex: 0 0 33.33%;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        cursor: pointer;
+        box-sizing: border-box;
+        padding: 0.5em;
+        border: 2px solid $darkColor;
+        border-bottom: 5px solid $darkColor;
+        border-radius: 5px;
+        background-color: $lightColor;
+        transition: background-color,border-bottom 0.1s;
+        &:hover{
+            background-color: $bgC-saturated;
+        }
+    }
+    input[type='radio']:checked+label{
+        border-bottom: 2px solid $darkColor;
+        background-color: $darkColor;
+        color: $lightColor;
+    }
+}
+
+$icons:(
+    partyIcon: '\f79f',
+    birthdayIcon: '\f1fd',
+    schoolIcon: '\f19d',
+    workIcon: '\f0b1',
+    wrenchIcon: '\f0ad'
+);
+
+@each $name,$value in $icons {
+    .iconSelector ##{$name}+label::after{
+        content: $value;
+        font-size: 1.25rem;
+    } 
+}
