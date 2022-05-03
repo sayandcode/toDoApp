@@ -56,6 +56,13 @@ nav{
 }
 /* SCROLLBAR */
 
+/* SELECTION COLOR */
+::selection{
+    background-color: $darkColor;
+    color: $bgC-saturated;
+}
+/* SELECTION COLOR */
+
 @import 'navStyling.scss';
 @import 'contextMenu.scss';
 @import 'rightSide.scss';
