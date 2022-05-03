@@ -1,4 +1,5 @@
 import {createTaskFromInputs} from '../formStuff.js'
+import Task from '../tasks&Projects/tasks.js'
 
 function newTaskModal(){
     //initialize
@@ -20,7 +21,7 @@ function newTaskModal(){
     }
     
     function stopListening(){
-        form.removeEventListener('click', createTask)
+        form.removeEventListener('submit', createTask)
         cancelBtn.removeEventListener('click', closeModal);
     }
 
@@ -31,7 +32,8 @@ function newTaskModal(){
 
     function createTask(event){
         const userInputs=createTaskFromInputs(event);
-        console.log(...userInputs);
+        new Task(...userInputs);
+        closeModal();
     }
 }
 
