@@ -1,3 +1,5 @@
+import {createTaskFromInputs} from '../formStuff.js'
+
 function newTaskModal(){
     //initialize
     const newTaskModal=document.getElementById('newTaskTemplate').content.cloneNode(true);
@@ -5,6 +7,7 @@ function newTaskModal(){
 
     //cache DOM
     const modal=document.querySelector('.modalBGOverlay');
+    const form=modal.querySelector('form');
     const submitBtn=document.querySelector('.modal .submitBtn');
     const cancelBtn=document.querySelector('.modal .cancelBtn');
 
@@ -12,12 +15,12 @@ function newTaskModal(){
     listen();
 
     function listen(){
-        submitBtn.addEventListener('click', createTask)
+        form.addEventListener('submit', createTask);
         cancelBtn.addEventListener('click', closeModal);
     }
     
     function stopListening(){
-        submitBtn.removeEventListener('click', createTask)
+        form.removeEventListener('click', createTask)
         cancelBtn.removeEventListener('click', closeModal);
     }
 
@@ -26,8 +29,9 @@ function newTaskModal(){
         modal.remove();
     }
 
-    function createTask(){
-        //to be made
+    function createTask(event){
+        const userInputs=createTaskFromInputs(event);
+        console.log(...userInputs);
     }
 }
 

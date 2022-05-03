@@ -8,7 +8,6 @@ function listen(){
     const FAB=document.getElementById('FAB');
     FAB.addEventListener('click',()=>{
         newTaskModal();
-        console.log('hi')
     });
 }
 
