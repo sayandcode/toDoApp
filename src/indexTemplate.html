@@ -13,71 +13,39 @@
         <span class="home icon">Home</span>
         <section>
             <span class="projects icon">Projects</span>
-            <ul>
-                <li class="projectSlab hoverOptions"><span class="projectName">First</span></li>
-                <li class="projectSlab hoverOptions"><span class="projectName">Second</span></li>
-                <li class="projectSlab hoverOptions"><span class="projectName">Third</span></li>
-            </ul>
             <input type="text" id="newProjectfromNav" placeholder="Add new project...➕" maxlength="30"></input>
         </section>
         <span class="allTasks icon">All Tasks</span>
     </nav>
-    <div class="FAB icon">New Task</div>
-    <main class="rightSide homeTasks">
-        <h2>Today</h2>
-        <ul class="taskList">
-            <li class="task checked"><span class="taskName">Eat</span>
-                <span class="deadline">Deadline: 28th March</span>
-                <span class="deleteBtn">Delete</span>
-            </li>
-            <li class="task"><span class="taskName">Sleep</span>
-                <span class="deadline">Deadline: 28th March</span>
-                <span class="deleteBtn">Delete</span>
-            </li>
-            <li class="task"><span class="taskName">Pray</span>
-                <span class="deadline">Deadline: 28th March</span>
-                <span class="deleteBtn">Delete</span>
-            </li>
+    <div id="FAB" class="icon">New Task</div>
+    <main class="rightSide empty"></main>
+    <!-- Templates below this line -->
+    <template id="navProjectsTemplate">
+        <ul>
+            <li class="projectSlab hoverOptions"><span class="projectName">First</span></li>
+            <li class="projectSlab hoverOptions"><span class="projectName">Second</span></li>
+            <li class="projectSlab hoverOptions"><span class="projectName">Third</span></li>
         </ul>
-        <h2>This Week</h2>
-        <ul class="taskList">
-            <li class="task checked"><span class="taskName">Eat</span>
-                <span class="deadline">Deadline: 28th March</span>
-                <span class="deleteBtn">Delete</span>
-            </li>
-            <li class="task"><span class="taskName">Sleep</span>
-                <span class="deadline">Deadline: 28th March</span>
-                <span class="deleteBtn">Delete</span>
-            </li>
-            <li class="task"><span class="taskName">Pray</span>
-                <span class="deadline">Deadline: 28th March</span>
-                <span class="deleteBtn">Delete</span>
-            </li>
-            <li class="task"><span class="taskName">Repeat</span>
-                <span class="deadline">Deadline: 28th March</span>
-                <span class="deleteBtn">Delete</span>
-            </li>
-        </ul>
-        <h2 id="home2allTasks" class="navigate2diffSection icon">All Tasks</h2>
-        <h2 class="navigate2diffSection icon">Projects</h2>
-        <div class="projectCards">
-            <div class="projectCard hoverOptions">
-                <h3 class="projectName">Generic Name</h3>
-                <span class="noOfTasks">5 tasks left</span>
-                <span class="nextDeadline">29th March</span>
+    </template>
+    <template id="newTaskTemplate">
+        <div class="modalBGOverlay">
+            <div class="modal">
+                <label for="taskName">Task Name:<input class="inputBox" type="text" name="taskName" id="taskName" maxlength="30"></label>
+                <label for="taskDateTime">Task Date:<input class="inputBox" type="datetime-local" name="taskDateTime" id="taskDateTime"></label>
+                <label for="chooseProject">Choose a Project(Optional)
+                    <select class="inputBox" name="chooseProject" id="chooseProject">
+                        <option value="None">None</option>
+                        <option value="First">First</option>
+                        <option value="Second">Second</option>
+                        <option value="Third">Third</option>
+                    </select>
+                </label>
+                <div class="btnWrapper">
+                    <button class="submitBtn btnSmall">Submit</button>
+                    <button class="cancelBtn btnSmall">Cancel</button>
+                </div>
             </div>
-            <div class="projectCard hoverOptions">
-                <h3 class="projectName">Generic Name</h3>
-                <span class="noOfTasks">5 tasks left</span>
-                <span class="nextDeadline">29th March</span>
-            </div>
-            <div class="projectCard hoverOptions">
-                <h3 class="projectName">Generic Name</h3>
-                <span class="noOfTasks">5 tasks left</span>
-                <span class="nextDeadline">29th March</span>
-            </div>
-            <div class="newProjectCard">New Project ➕</div>
         </div>
-    </main>
+    </template>
 </body>
 </html>
