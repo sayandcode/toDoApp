@@ -8,7 +8,7 @@
     <title>To Do App</title>
 </head>
 <body>
-    <h1 class="logo">All Tasks</h1>
+    <h1 class="logo">To Do App</h1>
     <nav>
         <span class="home icon">Home</span>
         <section>
@@ -16,19 +16,15 @@
             <ul>
                 <li class="projectSlab hoverOptions"><span class="projectName">First</span></li>
                 <li class="projectSlab hoverOptions"><span class="projectName">Second</span></li>
-                <li class="projectSlab hoverOptions"><span class="projectName">Third</span>
-                    <ul class="contextMenu">
-                        <li>Rename</li>
-                        <li>Delete Project</li>
-                    </ul>
-                </li>
+                <li class="projectSlab hoverOptions"><span class="projectName">Third</span></li>
             </ul>
             <input type="text" id="newProjectfromNav" placeholder="Add new project...➕" maxlength="30"></input>
         </section>
         <span class="allTasks icon">All Tasks</span>
     </nav>
-    <main class="rightSide allTasks">
-        <h2 class="hoverOptions">Today</h2>
+    <div class="FAB icon">New Task</div>
+    <main class="rightSide homeTasks">
+        <h2>Today</h2>
         <ul class="taskList">
             <li class="task checked"><span class="taskName">Eat</span>
                 <span class="deadline">Deadline: 28th March</span>
@@ -43,26 +39,7 @@
                 <span class="deleteBtn">Delete</span>
             </li>
         </ul>
-        <h2 class="hoverOptions">ThisWeek</h2>
-        <ul class="taskList">
-            <li class="task checked"><span class="taskName">Eat</span>
-                <span class="deadline">Deadline: 28th March</span>
-                <span class="deleteBtn">Delete</span>
-            </li>
-            <li class="task"><span class="taskName">Sleep</span>
-                <span class="deadline">Deadline: 28th March</span>
-                <span class="deleteBtn">Delete</span>
-            </li>
-            <li class="task"><span class="taskName">Pray</span>
-                <span class="deadline">Deadline: 28th March</span>
-                <span class="deleteBtn">Delete</span>
-            </li>
-            <li class="task"><span class="taskName">Repeat</span>
-                <span class="deadline">Deadline: 28th March</span>
-                <span class="deleteBtn">Delete</span>
-            </li>
-        </ul>
-        <h2 class="hoverOptions">This Month</h2>
+        <h2>This Week</h2>
         <ul class="taskList">
             <li class="task checked"><span class="taskName">Eat</span>
                 <span class="deadline">Deadline: 28th March</span>
@@ -81,6 +58,26 @@
                 <span class="deleteBtn">Delete</span>
             </li>
         </ul>
+        <h2 id="home2allTasks" class="navigate2diffSection icon">All Tasks</h2>
+        <h2 class="navigate2diffSection icon">Projects</h2>
+        <div class="projectCards">
+            <div class="projectCard hoverOptions">
+                <h3 class="projectName">Generic Name</h3>
+                <span class="noOfTasks">5 tasks left</span>
+                <span class="nextDeadline">29th March</span>
+            </div>
+            <div class="projectCard hoverOptions">
+                <h3 class="projectName">Generic Name</h3>
+                <span class="noOfTasks">5 tasks left</span>
+                <span class="nextDeadline">29th March</span>
+            </div>
+            <div class="projectCard hoverOptions">
+                <h3 class="projectName">Generic Name</h3>
+                <span class="noOfTasks">5 tasks left</span>
+                <span class="nextDeadline">29th March</span>
+            </div>
+            <div class="newProjectCard">New Project ➕</div>
+        </div>
     </main>
 </body>
 </html>
