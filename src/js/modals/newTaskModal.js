@@ -1,7 +1,7 @@
 import newTaskModalTemplate from '../../fullRenders/modalNewTask.html';
-import template2Node from '../template2Node.js';
+import template2Node from '../utilities/template2Node.js';
 
-import {createTaskFromInputs} from '../formStuff.js';
+import {createTaskFromInputs} from '../utilities/formStuff.js';
 import Task from '../tasks&Projects/tasks.js';
 // import {renderRightSide} from '../UIStuff.js';
 

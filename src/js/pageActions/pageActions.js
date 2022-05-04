@@ -1,4 +1,4 @@
-import {newTaskModal} from './modals/newTaskModal.js';
+import {newTaskModal} from '../modals/newTaskModal.js';
 
 
 function initializeWebsite(){
