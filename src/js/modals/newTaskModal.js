@@ -4,6 +4,7 @@ import template2Node from '../utilities/template2Node.js';
 import {createTaskFromInputs} from '../utilities/formStuff.js';
 import Task from '../tasks&Projects/tasks.js';
 import pubsub from '../pageActions/pubsub.js';
+import { add, format } from 'date-fns';
 
 function newTaskModal(){
     //initialize
@@ -13,10 +14,16 @@ function newTaskModal(){
     //cache DOM
     const modal=document.querySelector('.modalBGOverlay');
     const form=modal.querySelector('form');
+    const datePicker=document.getElementById('taskDateTime');
     const cancelBtn=document.querySelector('.modal .cancelBtn');
+
+    //default value
+    const defaultTaskDate=add(new Date(),{days:1}); 
+    datePicker.value = format(defaultTaskDate,"yyyy-MM-dd'T'hh:mm");
 
     //listeners
     listen();
+
 
     function listen(){
         form.addEventListener('submit', createTask);
