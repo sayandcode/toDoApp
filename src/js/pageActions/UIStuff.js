@@ -3,6 +3,7 @@ import renderMethods from '../pages/renderMethods.js'
 import Task from "../tasks&Projects/tasks.js";
 
 //cache DOM
+const logo=document.getElementById('logo');
 const rightSide = document.getElementById('rightSide');
 let currTab='allTasksTab';
 
@@ -28,5 +29,6 @@ function switchTab(clickedTab){
     if(currTab===clickedTab.id)
         return;
     currTab=clickedTab.id;
+    logo.textContent= (currTab==='homeTab')? 'To Do App' : clickedTab.textContent;
     renderRightSide();
 }
