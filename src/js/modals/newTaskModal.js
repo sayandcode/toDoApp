@@ -3,7 +3,7 @@ import template2Node from '../utilities/template2Node.js';
 
 import {createTaskFromInputs} from '../utilities/formStuff.js';
 import Task from '../tasks&Projects/tasks.js';
-
+import pubsub from '../pageActions/pubsub.js';
 
 function newTaskModal(){
     //initialize
