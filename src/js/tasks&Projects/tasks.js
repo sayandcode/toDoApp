@@ -1,15 +1,15 @@
 export default class Task{
-    #name;    
-    #date;
-    #project;
-
-    constructor(name,date,project){
-        this.#name=name;
-        this.#date=date;
-        this.#project=project;
-        Task.AllTasks.push(this);
-    }
-
     static AllTasks=[];
 
+    #taskName;    
+    #taskDate;
+
+    constructor(name,date,project){
+        this.#taskName=name;
+        this.#taskDate=date;
+        if(project)
+            project.addTask(this);
+        
+        Task.AllTasks.push(this);
+    }
 }

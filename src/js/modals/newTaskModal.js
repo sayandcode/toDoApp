@@ -3,7 +3,7 @@ import template2Node from '../utilities/template2Node.js';
 
 import {createTaskFromInputs} from '../utilities/formStuff.js';
 import Task from '../tasks&Projects/tasks.js';
-// import {renderRightSide} from '../UIStuff.js';
+
 
 function newTaskModal(){
     //initialize
@@ -35,9 +35,10 @@ function newTaskModal(){
 
     function createTask(event){
         const userInputs=createTaskFromInputs(event);
-        new Task(...userInputs);
+        const a=new Task(...userInputs);
+        console.log(a);
         closeModal();
-        // renderRightSide();
+        
     }
 }
 
