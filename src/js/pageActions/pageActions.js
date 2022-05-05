@@ -14,7 +14,6 @@ function listen(){
         newTaskModal();
     });
     tabs.forEach(tab=>tab.addEventListener('click',function(){
-        console.log('clickedOn',this);
         pubsub.publish('tabSwitched',this);
     }));
 }
