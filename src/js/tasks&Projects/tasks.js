@@ -1,4 +1,6 @@
 import { isSameDay, isSameMonth, isSameWeek, isSameYear } from 'date-fns';
+import pubsub from '../pageActions/pubsub.js';
+
 
 
 export default class Task{
@@ -14,10 +16,15 @@ export default class Task{
             project.addTask(this);
         
         Task.AllTasks.push(this);
+        pubsub.publish('tasksChanged');
     }
 
     get date(){
         return this.#taskDate;
+    }
+
+    get name(){
+        return this.#taskName;
     }
 
     static groupByDate(Tasks){
@@ -37,6 +44,12 @@ export default class Task{
                 groups.makeAndPush('Coming Years ;)',task)
         }
         return groups;
+    }
+
+    delete(){
+        const i=Task.AllTasks.indexOf(this);
+        Task.AllTasks.splice(i,1);
+        pubsub.publish('tasksChanged');
     }
 }
 

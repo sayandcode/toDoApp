@@ -3,7 +3,6 @@ import template2Node from '../utilities/template2Node.js';
 
 import {createTaskFromInputs} from '../utilities/formStuff.js';
 import Task from '../tasks&Projects/tasks.js';
-import pubsub from '../pageActions/pubsub.js';
 import { add, format } from 'date-fns';
 
 function newTaskModal(){
@@ -44,7 +43,6 @@ function newTaskModal(){
         const userInputs=createTaskFromInputs(event);
         new Task(...userInputs);
         closeModal();
-        pubsub.publish('tasksChanged');
     }
 }
 
