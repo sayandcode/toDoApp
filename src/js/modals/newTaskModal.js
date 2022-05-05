@@ -38,7 +38,7 @@ function newTaskModal(){
         const a=new Task(...userInputs);
         console.log(a);
         closeModal();
-        
+        pubsub.publish('tasksChanged');
     }
 }
 

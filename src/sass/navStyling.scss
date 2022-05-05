@@ -16,17 +16,17 @@ nav{
         }
     }
     
-    .home::before{
+    #homeTab::before{
         content: '\f015';
     }
-    .projects::before{
+    #projectsTab::before{
         content: '\f02d';
     }
-    .allTasks::before{
+    #allTasksTab::before{
         content: '\f304';
     }
     
-    .home,.projects,.allTasks{
+    #homeTab,#projectsTab,#allTasksTab{
         cursor: pointer;
     }
     

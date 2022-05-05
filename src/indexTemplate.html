@@ -10,15 +10,15 @@
 <body>
     <h1 class="logo">To Do App</h1>
     <nav>
-        <span class="home icon">Home</span>
+        <span id="homeTab" class="tab icon">Home</span>
         <section>
-            <span class="projects icon">Projects</span>
+            <span id="projectsTab" class="tab icon">Projects</span>
             <input type="text" id="newProjectfromNav" placeholder="Add new project...➕" maxlength="30"></input>
         </section>
-        <span class="allTasks icon">All Tasks</span>
+        <span id="allTasksTab" class="tab icon">All Tasks</span>
     </nav>
     <div id="FAB" class="icon">New Task</div>
-    <main class="rightSide empty"></main>
+    <main id="rightSide" class="allTasks empty"></main>
     <!-- Templates below this line -->
     <template id="navProjectsTemplate">
         <ul>
