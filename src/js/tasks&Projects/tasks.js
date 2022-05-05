@@ -40,13 +40,9 @@ export default class Task{
     }
 }
 
-Object.prototype.makeAndPush = function (label,task){
-    this[label]=this[label]||[];
-    this[label].push(task);
-}
-
-
-
-
-
-
+Object.defineProperty(Object.prototype, 'makeAndPush', {
+    value: function (label,task){
+        this[label]=this[label]||[];
+        this[label].push(task);
+    }
+});

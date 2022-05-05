@@ -1,5 +1,6 @@
 import pubsub from "./pubsub.js";
 import renderMethods from '../pages/renderMethods.js'
+import Task from "../tasks&Projects/tasks.js";
 
 //cache DOM
 const rightSide = document.getElementById('rightSide');
@@ -10,9 +11,17 @@ pubsub.subscribe('tasksChanged',renderRightSide);
 pubsub.subscribe('tabSwitched',switchTab)
 
 function renderRightSide(){
-    console.log('changedTo',currTab)//which tab are we on?
+    rightSide.innerHTML='';     //clear the page
+
+    //render new stuff
     const newRightSideContent=renderMethods[currTab]();
-    rightSide.appendChild(newRightSideContent);
+
+    if(newRightSideContent){
+        rightSide.append(...newRightSideContent);
+        rightSide.classList.remove('empty');
+    }
+    else
+        rightSide.classList.add('empty');
 };
 
 function switchTab(clickedTab){
@@ -20,9 +29,4 @@ function switchTab(clickedTab){
         return;
     currTab=clickedTab.id;
     renderRightSide();
-}
-
-function emptyPage(){
-    rightSide.innerHTML='';
-    rightSide.className='empty';
 }

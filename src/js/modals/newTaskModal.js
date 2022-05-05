@@ -42,8 +42,7 @@ function newTaskModal(){
 
     function createTask(event){
         const userInputs=createTaskFromInputs(event);
-        const a=new Task(...userInputs);
-        console.log(a);
+        new Task(...userInputs);
         closeModal();
         pubsub.publish('tasksChanged');
     }
