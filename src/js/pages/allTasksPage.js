@@ -2,6 +2,7 @@ import template2Node from "../utilities/template2Node.js";
 import TaskTemplate from '../../fullRenders/taskTemplate.html';
 import Task from '../tasks&Projects/tasks.js'
 import { formatRelative } from "date-fns";
+import { enIN } from "date-fns/locale";
 
 const allTasksPage= (function(){
     let groupedTasks;
@@ -25,7 +26,7 @@ const allTasksPage= (function(){
             //loop and add tasks
             for (const task of groupedTasks[group]) {
                 const template=template2Node(TaskTemplate);
-                const relativeDate=formatRelative(task.date, new Date());
+                const relativeDate=formatRelative(task.date, new Date(),{locale:enIN});
 
                 template.querySelector('.taskName').textContent=task.name;
                 template.querySelector('.deadline').textContent=`Deadline: ${relativeDate}`;

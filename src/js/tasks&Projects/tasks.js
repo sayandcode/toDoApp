@@ -15,7 +15,14 @@ export default class Task{
         if(project)
             project.addTask(this);
         
-        Task.AllTasks.push(this);
+        //find the task with date just after this one, and splice it there.
+        const insertPosition= Task.AllTasks.findIndex(element=>(element.date-this.#taskDate)>0);
+        if(insertPosition===-1)
+            Task.AllTasks.push(this)
+        else
+            Task.AllTasks.splice(insertPosition,0,this);
+        console.log(Task.AllTasks);
+
         pubsub.publish('tasksChanged');
     }
 
@@ -29,19 +36,20 @@ export default class Task{
 
     static groupByDate(Tasks){
         const groups={};
+        const requiredOrder=['Today','This Week','This Month','This Year','Coming Years ;)']
         for (const task of Tasks) {
             const comparingDates=[new Date(),task.date];
 
             if(isSameDay(...comparingDates))
-                groups.makeAndPush('Today',task);
+                groups.makeAndPush(requiredOrder[0],task);
             else if(isSameWeek(...comparingDates))
-                groups.makeAndPush('This Week',task)
+                groups.makeAndPush(requiredOrder[1],task)
             else if(isSameMonth(...comparingDates))
-                groups.makeAndPush('This Month',task)
+                groups.makeAndPush(requiredOrder[2],task)
             else if(isSameYear(...comparingDates))
-                groups.makeAndPush('This Year',task)
+                groups.makeAndPush(requiredOrder[3],task)
             else
-                groups.makeAndPush('Coming Years ;)',task)
+                groups.makeAndPush(requiredOrder[4],task)
         }
         return groups;
     }
