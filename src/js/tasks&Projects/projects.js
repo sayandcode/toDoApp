@@ -12,6 +12,10 @@ export default class Project{
         Project.AllProjects.push(this);
     }
 
+    get name(){
+        return this.#projectName;
+    }
+
     addTask(newTask){
         this.#tasks.push(newTask);
     }

@@ -1,3 +1,5 @@
+import Project from "../tasks&Projects/projects";
+
 function fixFormsBug(e){
     e.stopImmediatePropagation();   //chrome double submit bug
     e.preventDefault();             //dont run GET method and change url
@@ -7,9 +9,10 @@ function createTaskFromInputs(event){
     fixFormsBug(event);
     const name=document.getElementById('taskName').value;
     const date=new Date(document.getElementById('taskDateTime').value);
-    const project=document.getElementById('chooseProject').value||undefined;
+    const projID=document.getElementById('chooseProject').value;
+    const assignedProject=Project.AllProjects.find((project)=> project.name===projID);
 
-    return [name,date,project]
+    return [name,date,assignedProject]
 }
 
 function createProjectFromInputs(event){

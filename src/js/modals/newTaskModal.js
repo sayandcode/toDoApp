@@ -2,6 +2,7 @@ import newTaskModalTemplate from '../../fullRenders/modalNewTask.html';
 import template2Node from '../utilities/template2Node.js';
 import {createTaskFromInputs} from '../utilities/formStuff.js';
 import Task from '../tasks&Projects/tasks.js';
+import Project from '../tasks&Projects/projects.js'
 import { add, format } from 'date-fns';
 
 export default function newTaskModal(){
@@ -13,7 +14,16 @@ export default function newTaskModal(){
     const modal=document.querySelector('.modalBGOverlay');
     const form=modal.querySelector('form');
     const datePicker=document.getElementById('taskDateTime');
+    const chooseProject=modal.querySelector('#chooseProject');
     const cancelBtn=modal.querySelector('.cancelBtn');
+
+    //listProjects
+    Project.AllProjects.forEach(project=>{
+        const option=document.createElement('option');
+        option.textContent=project.name;
+        option.data=project.name;
+        chooseProject.appendChild(option);  
+    });
 
     //default value
     const defaultTaskDate=add(new Date(),{days:1}); 
