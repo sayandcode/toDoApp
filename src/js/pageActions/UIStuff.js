@@ -1,18 +1,24 @@
+import {newTaskModal} from '../modals/newTaskModal.js';
 import pubsub from "./pubsub.js";
 import renderMethods from '../pages/renderMethods.js'
-import Task from "../tasks&Projects/tasks.js";
 
 //cache DOM
+let currTab='allTasksTab';
 const logo=document.getElementById('logo');
 const rightSide = document.getElementById('rightSide');
-let currTab='allTasksTab';
+const FAB=document.getElementById('FAB');
+const tabs=document.querySelectorAll('.tab');
 
 //listening
+FAB.addEventListener('click',newTaskModal);
+tabs.forEach(tab=>tab.addEventListener('click',function(){
+    switchTab(this)
+}));
 pubsub.subscribe('tasksChanged',renderRightSide);
-pubsub.subscribe('tabSwitched',switchTab)
 
 function renderRightSide(){
-    rightSide.innerHTML='';     //clear the page
+    //clear the page
+    rightSide.innerHTML='';     
 
     //render new stuff
     const newRightSideContent=renderMethods[currTab]();
