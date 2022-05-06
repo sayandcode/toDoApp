@@ -1,11 +1,11 @@
-class Project{
+export default class Project{
     static AllProjects=[];
 
     #projectName;
     #projectIcon;
     #tasks;
 
-    constructor(name){
+    constructor(name,icon='\\f0ae'){
         this.#projectName=name;
         this.#projectIcon=icon;
         this.#tasks=[];

@@ -1,4 +1,5 @@
-import {newTaskModal} from '../modals/newTaskModal.js';
+import newTaskModal from '../modals/newTaskModal.js';
+import newProjectModal from '../modals/newProjectModal.js'
 import pubsub from "./pubsub.js";
 import renderMethods from '../pages/renderMethods.js'
 
@@ -8,9 +9,14 @@ const logo=document.getElementById('logo');
 const rightSide = document.getElementById('rightSide');
 const FAB=document.getElementById('FAB');
 const tabs=document.querySelectorAll('.tab');
+const newProjectFromNav=document.getElementById('newProjectFromNav');
 
 //listening
 FAB.addEventListener('click',newTaskModal);
+newProjectFromNav.addEventListener('keydown',function(e){
+    if(e.key ==='Enter')
+        newProjectModal.call(this);
+});
 tabs.forEach(tab=>tab.addEventListener('click',function(){
     switchTab(this)
 }));

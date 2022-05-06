@@ -5,7 +5,6 @@ function fixFormsBug(e){
 
 function createTaskFromInputs(event){
     fixFormsBug(event);
-
     const name=document.getElementById('taskName').value;
     const date=new Date(document.getElementById('taskDateTime').value);
     const project=document.getElementById('chooseProject').value||undefined;
@@ -13,6 +12,16 @@ function createTaskFromInputs(event){
     return [name,date,project]
 }
 
+function createProjectFromInputs(event){
+    fixFormsBug(event);
+    const name=document.getElementById('projName').value;
+    const selectedIcon=document.querySelector('input[type="radio"][name="iconSelector"]:checked');
+    const iconHex=selectedIcon?selectedIcon.value:undefined;
+    
+    return [name,iconHex];
+}
+
 export{
-    createTaskFromInputs
+    createTaskFromInputs,
+    createProjectFromInputs
 }

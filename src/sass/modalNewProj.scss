@@ -40,17 +40,10 @@
     }
 }
 
-$icons:(
-    partyIcon: '\f79f',
-    birthdayIcon: '\f1fd',
-    schoolIcon: '\f19d',
-    workIcon: '\f0b1',
-    wrenchIcon: '\f0ad'
-);
-
-@each $name,$value in $icons {
-    .iconSelector ##{$name}+label::after{
-        content: $value;
+.iconSelector label{
+    --iconHex:'';
+    &::before{
+        content: var(--iconHex);
         font-size: 1.25rem;
     } 
 }
