@@ -1,8 +1,7 @@
 const pubsub=(function(){
     const events={};
     function subscribe(eventName,fn){
-        events[eventName]=events[eventName]||[];    //initialize an empty array if the event doesnt exist yet
-        events[eventName].push(fn);
+        events.makeOrPush(eventName,fn);
     }
     function unsubscribe(eventName,fn){
         const i=events[eventName].indexOf(fn); //check if an event is there

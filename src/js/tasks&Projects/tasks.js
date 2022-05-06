@@ -14,7 +14,7 @@ export default class Task{
 
             for (const i in requiredOrder) {
                 if(checkingFns[i](task.date)){
-                    groups.makeAndPush(requiredOrder[i],task)
+                    groups.makeOrPush(requiredOrder[i],task)
                     break;
                 }
             }
@@ -65,9 +65,9 @@ export default class Task{
     }
 }
 
-Object.defineProperty(Object.prototype, 'makeAndPush', {
-    value: function (label,task){
-        this[label]=this[label]||[];
-        this[label].push(task);
+Object.defineProperty(Object.prototype, 'makeOrPush', {
+    value: function (newKey,item){
+        this[newKey]=this[newKey]||[];
+        this[newKey].push(item);
     }
 });
