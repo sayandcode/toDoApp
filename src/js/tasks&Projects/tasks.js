@@ -1,4 +1,4 @@
-import { isSameDay, isSameMonth, isSameWeek, isSameYear } from 'date-fns';
+import { isPast, isSameDay, isSameMonth, isSameWeek, isSameYear, isThisMonth, isThisWeek, isThisYear, isToday, isTomorrow, isValid } from 'date-fns';
 import pubsub from '../pageActions/pubsub.js';
 
 
@@ -21,7 +21,6 @@ export default class Task{
             Task.AllTasks.push(this)
         else
             Task.AllTasks.splice(insertPosition,0,this);
-        console.log(Task.AllTasks);
 
         pubsub.publish('tasksChanged');
     }
@@ -36,20 +35,16 @@ export default class Task{
 
     static groupByDate(Tasks){
         const groups={};
-        const requiredOrder=['Today','This Week','This Month','This Year','Coming Years ;)']
+        const requiredOrder=['In the Past','Today','Tomorrow','This Week','This Month','This Year','Coming Years ;)']
+        const checkingFns=  [a=>isToday(a)?false:isPast(a),isToday,isTomorrow,isThisWeek,isThisMonth,isThisYear, ()=>true]
         for (const task of Tasks) {
-            const comparingDates=[new Date(),task.date];
 
-            if(isSameDay(...comparingDates))
-                groups.makeAndPush(requiredOrder[0],task);
-            else if(isSameWeek(...comparingDates))
-                groups.makeAndPush(requiredOrder[1],task)
-            else if(isSameMonth(...comparingDates))
-                groups.makeAndPush(requiredOrder[2],task)
-            else if(isSameYear(...comparingDates))
-                groups.makeAndPush(requiredOrder[3],task)
-            else
-                groups.makeAndPush(requiredOrder[4],task)
+            for (const i in requiredOrder) {
+                if(checkingFns[i](task.date)){
+                    groups.makeAndPush(requiredOrder[i],task)
+                    break;
+                }
+            }
         }
         return groups;
     }
