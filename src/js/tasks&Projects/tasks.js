@@ -6,8 +6,25 @@ import pubsub from '../pageActions/pubsub.js';
 export default class Task{
     static AllTasks=[];
 
+    static groupByDate(Tasks){
+        const groups={};
+        const requiredOrder=['In the Past','Today','Tomorrow','This Week','This Month','This Year','Coming Years ;)']
+        const checkingFns=  [a=>isToday(a)?false:isPast(a),isToday,isTomorrow,isThisWeek,isThisMonth,isThisYear, ()=>true]
+        for (const task of Tasks) {
+
+            for (const i in requiredOrder) {
+                if(checkingFns[i](task.date)){
+                    groups.makeAndPush(requiredOrder[i],task)
+                    break;
+                }
+            }
+        }
+        return groups;
+    }
+
     #taskName;    
     #taskDate;
+    #done=false;
 
     constructor(name,date,project){
         this.#taskName=name;
@@ -33,26 +50,18 @@ export default class Task{
         return this.#taskName;
     }
 
-    static groupByDate(Tasks){
-        const groups={};
-        const requiredOrder=['In the Past','Today','Tomorrow','This Week','This Month','This Year','Coming Years ;)']
-        const checkingFns=  [a=>isToday(a)?false:isPast(a),isToday,isTomorrow,isThisWeek,isThisMonth,isThisYear, ()=>true]
-        for (const task of Tasks) {
-
-            for (const i in requiredOrder) {
-                if(checkingFns[i](task.date)){
-                    groups.makeAndPush(requiredOrder[i],task)
-                    break;
-                }
-            }
-        }
-        return groups;
+    get status(){
+        return this.#done;
     }
 
     delete(){
         const i=Task.AllTasks.indexOf(this);
         Task.AllTasks.splice(i,1);
         pubsub.publish('tasksChanged');
+    }
+
+    toggleDone(){
+        this.#done= !this.#done;
     }
 }
 

@@ -3,7 +3,7 @@ $icon-width:1.5em;
 .icon::before,.icon::after,
 .projectSlab::marker,
 .hoverOptions::after,
-.task::before {
+.checkbox::before {
     display: inline-block;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
@@ -13,7 +13,7 @@ $icon-width:1.5em;
     text-align: center;
 }
 
-.task::before{    
+.checkbox::before{    
     font: var(--fa-font-regular);
 }
 

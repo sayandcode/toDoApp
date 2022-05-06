@@ -18,17 +18,19 @@ main h2{
     &:not(&:last-of-type){
         border-bottom: 2px solid $bgC-saturated;
     }
-    &::before{
+    .checkbox{
+        &::before{
         content: '\f111';
-    }
-    &:hover::before{
-        content: '\f058';
-        cursor: pointer;
-    }
-    
-    &.checked::before{
-        font: var(--fa-font-solid);
-        content: '\f058';
+        }
+        &:hover::before{
+            content: '\f058';
+            cursor: pointer;
+        }
+        
+        &.checked::before{
+            font: var(--fa-font-solid);
+            content: '\f058';
+        }
     }
 
     position: relative;
