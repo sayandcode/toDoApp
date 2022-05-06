@@ -11,14 +11,15 @@ const allTasksPage= (function(){
         if(Object.keys(groupedTasks).length===0)
             return;
         
+        const result=document.createDocumentFragment();
         for (const group in groupedTasks) { //for each group
             //create heading 
-            var heading=document.createElement('h2');
+            const heading=document.createElement('h2');
             heading.textContent=group;
             heading.classList.add('hoverOptions');
 
             //create taskList
-            var taskList=document.createElement('ul');
+            const taskList=document.createElement('ul');
             taskList.classList.add('taskList');
             
             //loop and add tasks
@@ -32,9 +33,9 @@ const allTasksPage= (function(){
 
                 taskList.append(template);
             }
+            result.append(heading,taskList)
         }
-
-        return [heading,taskList]
+        return result;
     }
 
     function deleteTask(e){

@@ -16,9 +16,8 @@ function renderRightSide(){
 
     //render new stuff
     const newRightSideContent=renderMethods[currTab]();
-
     if(newRightSideContent){
-        rightSide.append(...newRightSideContent);
+        rightSide.append(newRightSideContent);
         rightSide.classList.remove('empty');
     }
     else
