@@ -5,9 +5,37 @@ import Project from './projects.js';
 import '../utilities/Custom Object Functions.js'
 
 class TaskList{
+    static #AllTaskLists={};
+    
+    static findById(Id){
+        return this.#AllTaskLists[Id];
+    }
+
+    static groupByDate(taskListID){
+        const Tasks=TaskList.findById(taskListID);
+        const groups={};
+        const requiredGroups=['In the Past','Today','Tomorrow','This Week','This Month','This Year','Coming Years ;)']
+        const checkingFns=  [a=>isToday(a)?false:isPast(a),isToday,isTomorrow,isThisWeek,isThisMonth,isThisYear, ()=>true]
+        
+        for (const taskID in Tasks) {
+            for (const i in requiredGroups) {
+                if(checkingFns[i](Tasks[taskID].date)){
+                    groups.makeOrPush(Tasks[taskID],requiredGroups[i])
+                    break;
+                }
+            }
+        }
+
+        return groups;
+    }
+    
     constructor(){
-        //an empty object, which acts as the taskList.
-        //it has all the methods, and its entries will be the tasks
+        Object.defineProperty(this,'ID',{
+            value: uuid(),
+            writable: false,
+            enumerable: false,
+        })
+        TaskList.#AllTaskLists[this.ID]=this;
     }
 
     insertChronologically(currTask){
@@ -23,21 +51,8 @@ class TaskList{
 class Task{
     static #AllTasks=new TaskList();
 
-    static groupByDate(Tasks=this.#AllTasks){
-        const groups={};
-        const requiredGroups=['In the Past','Today','Tomorrow','This Week','This Month','This Year','Coming Years ;)']
-        const checkingFns=  [a=>isToday(a)?false:isPast(a),isToday,isTomorrow,isThisWeek,isThisMonth,isThisYear, ()=>true]
-        
-        for (const taskID in Tasks) {
-            for (const i in requiredGroups) {
-                if(checkingFns[i](Tasks[taskID].date)){
-                    groups.makeOrPush(Tasks[taskID],requiredGroups[i])
-                    break;
-                }
-            }
-        }
-
-        return groups;
+    static get all(){   //wont expose the object, but will provide a reference that can be used by intended parties
+        return this.#AllTasks.ID;
     }
 
     static remove(task){
@@ -59,7 +74,6 @@ class Task{
         
         Task.#AllTasks.insertChronologically(this);
         pubsub.publish('tasksChanged');
-        console.log(Task.#AllTasks);
     }
 
     get date(){

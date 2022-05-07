@@ -1,6 +1,6 @@
 import template2Node from "../utilities/template2Node.js";
 import TaskTemplate from '../../fullRenders/taskTemplate.html';
-import {Task} from '../tasks&Projects/tasks.js'
+import {Task, TaskList} from '../tasks&Projects/tasks.js'
 import { formatRelative } from "date-fns";
 import { enIN } from "date-fns/locale";
 
@@ -8,7 +8,7 @@ const allTasksPage= (function(){
     let groupedTasks;
 
     function generate(){
-        groupedTasks=Task.groupByDate();
+        groupedTasks=TaskList.groupByDate(Task.all);
         if(Object.keys(groupedTasks).length===0)
             return;
         
