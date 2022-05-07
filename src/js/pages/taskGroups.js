@@ -10,7 +10,7 @@ const createTaskGroups= function(taskListID){
     function generate(){
         groupedTasks=TaskList.groupByDate(taskListID);
         if(Object.keys(groupedTasks).length===0)
-            return;
+            return '';
         
         const result=document.createDocumentFragment();
         for (const group in groupedTasks) { //for each group

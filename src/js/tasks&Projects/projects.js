@@ -1,4 +1,5 @@
 import { v4 as uuid } from 'uuid';
+import pubsub from '../pageActions/pubsub';
 import { TaskList } from './tasks';
 
 export default class Project{
@@ -24,6 +25,7 @@ export default class Project{
         this.#tasks=new TaskList();
 
         Project.#AllProjects[this.#projectID]=this;
+        pubsub.publish('projectsChanged');
     }
 
     get name(){
