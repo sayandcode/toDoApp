@@ -10,9 +10,8 @@ function createTaskFromInputs(event){
     const name=document.getElementById('taskName').value;
     const date=new Date(document.getElementById('taskDateTime').value);
     const projID=document.getElementById('chooseProject').value;
-    const assignedProject=Project.AllProjects.find((project)=> project.name===projID);
 
-    return [name,date,assignedProject]
+    return [name,date,projID]
 }
 
 function createProjectFromInputs(event){

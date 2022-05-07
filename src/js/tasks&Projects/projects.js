@@ -1,15 +1,27 @@
+import { v4 as uuid } from 'uuid';
+
 export default class Project{
-    static AllProjects=[];
+    static #AllProjects={};
+
+    static findById(id){
+        return this.#AllProjects[id];
+    }
+
+    static get allIDs(){
+        return [...Object.keys(this.#AllProjects)];
+    }
 
     #projectName;
     #projectIcon;
+    #projectID;
     #tasks;
 
     constructor(name,icon='\\f0ae'){
         this.#projectName=name;
         this.#projectIcon=icon;
-        this.#tasks=[];
-        Project.AllProjects.push(this);
+        this.#projectID=uuid();
+        this.#tasks={};
+        Project.findById[this.#projectID]=this;
     }
 
     get name(){
@@ -17,6 +29,6 @@ export default class Project{
     }
 
     addTask(newTask){
-        this.#tasks.push(newTask);
+        this.#tasks[newTask.id]=newTask;
     }
 }

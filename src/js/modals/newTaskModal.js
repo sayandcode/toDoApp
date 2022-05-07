@@ -18,10 +18,10 @@ export default function newTaskModal(){
     const cancelBtn=modal.querySelector('.cancelBtn');
 
     //listProjects
-    Project.AllProjects.forEach(project=>{
+    Project.allIDs.forEach(id=>{
         const option=document.createElement('option');
-        option.textContent=project.name;
-        option.data=project.name;
+        option.textContent=Project.findById(id).name;
+        option.value=id;
         chooseProject.appendChild(option);  
     });
 

@@ -8,7 +8,7 @@ const allTasksPage= (function(){
     let groupedTasks;
 
     function generate(){
-        groupedTasks=Task.groupByDate(Task.AllTasks);
+        groupedTasks=Task.groupByDate();
         if(Object.keys(groupedTasks).length===0)
             return;
         

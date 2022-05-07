@@ -30,6 +30,7 @@
     "date-fns": "^2.28.0",
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
-    "style-loader": "^3.3.1"
+    "style-loader": "^3.3.1",
+    "uuid": "^8.3.2"
   }
 }
