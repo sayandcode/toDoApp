@@ -35,7 +35,7 @@ nav{
     padding-inline: 5%;
     padding-block: (3rem*(1.25+1)) 2rem;
     overflow-y: auto;
-    &.empty{
+    &:empty{
         display: flex;
         justify-content: center;
         align-items: center;
