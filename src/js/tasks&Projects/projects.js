@@ -32,7 +32,6 @@ export default class Project{
 
     addTask(newTask){
         this.#tasks.insertChronologically(newTask);
-        console.log(Project.#AllProjects)
     }
 
     removeTask(task){
