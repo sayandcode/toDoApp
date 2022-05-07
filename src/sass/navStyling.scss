@@ -38,9 +38,11 @@ nav{
         padding-left: 1em;
         width: 80%;
         cursor: default;
+
+        --iconHex:'';
     
         &::marker{
-            content: '\f1fd';
+            content: var(--iconHex);
         }
         
         .projectName{

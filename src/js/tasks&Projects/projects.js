@@ -32,6 +32,10 @@ export default class Project{
         return this.#projectName;
     }
 
+    get icon(){
+        return this.#projectIcon;
+    }
+
     addTask(newTask){
         this.#tasks.insertChronologically(newTask);
     }

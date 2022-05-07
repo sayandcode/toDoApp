@@ -10,10 +10,13 @@ export default function generateNavbarProjects(){
     const projectSlabs=document.createElement('ul');
     allProjectIDs.forEach(id=>{
         const thisProject=Project.findById(id);
-        const slab=template2Node(slabTemplate);
-        slab.querySelector('.projectName').textContent=thisProject.name;
-        slab.key=id;
-        projectSlabs.append(slab);
+        const template=template2Node(slabTemplate);
+        
+        template.querySelector('.projectName').textContent=thisProject.name;
+        template.querySelector('.projectSlab').key=id;
+        template.querySelector('.projectSlab').style.setProperty('--iconHex',`'${thisProject.icon}'`);
+        
+        projectSlabs.append(template);
     });
     return projectSlabs;
 }
