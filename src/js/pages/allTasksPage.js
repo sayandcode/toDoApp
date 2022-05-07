@@ -18,9 +18,9 @@ const allTasksPage= (function(){
             const heading=document.createElement('h2');
             heading.textContent=group;
 
-            //create taskList
-            const taskList=document.createElement('ul');
-            taskList.classList.add('taskList');
+            //create taskGroup
+            const taskGroup=document.createElement('ul');
+            taskGroup.classList.add('taskGroup');
             
             //loop and add tasks
             for (const task of groupedTasks[group]) {
@@ -36,9 +36,9 @@ const allTasksPage= (function(){
                 template.querySelector('.checkbox').addEventListener('click',toggleCheck)
                 template.querySelector('.deleteBtn').addEventListener('click',deleteTask)
 
-                taskList.append(template);
+                taskGroup.append(template);
             }
-            result.append(heading,taskList)
+            result.append(heading,taskGroup)
         }
         return result;
     }
