@@ -1,6 +1,6 @@
 import template2Node from "../utilities/template2Node.js";
 import TaskTemplate from '../../fullRenders/taskTemplate.html';
-import Task from '../tasks&Projects/tasks.js'
+import {Task} from '../tasks&Projects/tasks.js'
 import { formatRelative } from "date-fns";
 import { enIN } from "date-fns/locale";
 

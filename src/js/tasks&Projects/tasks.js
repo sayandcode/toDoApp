@@ -4,9 +4,24 @@ import { v4 as uuid } from 'uuid';
 import Project from './projects.js';
 import '../utilities/Custom Object Functions.js'
 
+class TaskList{
+    constructor(){
+        //an empty object, which acts as the taskList.
+        //it has all the methods, and its entries will be the tasks
+    }
 
-export default class Task{
-    static #AllTasks={};
+    insertChronologically(currTask){
+        //find the task with date just after this one, and splice it there.
+        const insertPosition= this.findIndex(element=>(element.date-currTask.date)>0);
+        if(insertPosition===-1)
+            this[currTask.id]=currTask;
+        else
+            this.splice(insertPosition,0,[currTask.id,currTask]);
+    }
+}
+
+class Task{
+    static #AllTasks=new TaskList();
 
     static groupByDate(Tasks=this.#AllTasks){
         const groups={};
@@ -23,15 +38,6 @@ export default class Task{
         }
 
         return groups;
-    }
-
-    static insertChronologically(currTask){
-        //find the task with date just after this one, and splice it there.
-        const insertPosition= this.#AllTasks.findIndex(element=>(element.date-currTask.date)>0);
-        if(insertPosition===-1)
-            this.#AllTasks[currTask.id]=currTask;
-        else
-            this.#AllTasks.splice(insertPosition,0,[currTask.id,currTask]);
     }
 
     static remove(task){
@@ -51,8 +57,9 @@ export default class Task{
         if(projID)
             Project.findById(projID).addTask(this);
         
-        Task.insertChronologically(this);
+        Task.#AllTasks.insertChronologically(this);
         pubsub.publish('tasksChanged');
+        console.log(Task.#AllTasks);
     }
 
     get date(){
@@ -78,5 +85,10 @@ export default class Task{
     toggleDone(){
         this.#done= !this.#done;
     }
+}
+
+export {
+    Task,
+    TaskList
 }
 

@@ -1,7 +1,7 @@
 import newTaskModalTemplate from '../../fullRenders/modalNewTask.html';
 import template2Node from '../utilities/template2Node.js';
 import {createTaskFromInputs} from '../utilities/formStuff.js';
-import Task from '../tasks&Projects/tasks.js';
+import {Task} from '../tasks&Projects/tasks.js';
 import Project from '../tasks&Projects/projects.js'
 import { add, format } from 'date-fns';
 

@@ -1,4 +1,5 @@
 import { v4 as uuid } from 'uuid';
+import { TaskList } from './tasks';
 
 export default class Project{
     static #AllProjects={};
@@ -20,8 +21,9 @@ export default class Project{
         this.#projectName=name;
         this.#projectIcon=icon;
         this.#projectID=uuid();
-        this.#tasks={};
-        Project.findById[this.#projectID]=this;
+        this.#tasks=new TaskList();
+
+        Project.#AllProjects[this.#projectID]=this;
     }
 
     get name(){
@@ -29,6 +31,6 @@ export default class Project{
     }
 
     addTask(newTask){
-        this.#tasks[newTask.id]=newTask;
+        this.#tasks.insertChronologically(newTask);
     }
 }
