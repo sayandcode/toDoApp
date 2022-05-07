@@ -26,7 +26,8 @@ const allTasksPage= (function(){
             for (const task of groupedTasks[group]) {
                 const template=template2Node(TaskTemplate);
                 const relativeDate=formatRelative(task.date, new Date(),{locale:enIN});
-
+                
+                template.querySelector('li.task').key=task.id;
                 template.querySelector('.taskName').textContent=task.name;
                 template.querySelector('.deadline').textContent=`Deadline: ${relativeDate}`;
                 if(task.status)
@@ -43,23 +44,13 @@ const allTasksPage= (function(){
         return result;
     }
     
-    function clickedTask(e){
-        const task=e.path[1];
-        const clickedTaskList=e.path[2];
-        const taskIndex=Array.from(clickedTaskList.children).indexOf(task)
-
-        const groupName=clickedTaskList.previousElementSibling.textContent;
-        
-        return groupedTasks[groupName][taskIndex];
-    }
-    
     function toggleCheck(e){
         this.classList.toggle('checked');
-        clickedTask(e).toggleDone();
+        Task.findById(e.target.parentNode.key).toggleDone();
     }
 
     function deleteTask(e){
-        clickedTask(e).delete();
+        Task.findById(e.target.parentNode.key).delete();
     }
 
     return{

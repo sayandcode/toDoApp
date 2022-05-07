@@ -7,8 +7,8 @@ import '../utilities/Custom Object Functions.js'
 class TaskList{
     static #AllTaskLists={};
     
-    static findById(Id){
-        return this.#AllTaskLists[Id];
+    static findById(id){
+        return this.#AllTaskLists[id];
     }
 
     static groupByDate(taskListID){
@@ -30,12 +30,12 @@ class TaskList{
     }
     
     constructor(){
-        Object.defineProperty(this,'ID',{
+        Object.defineProperty(this,'id',{
             value: uuid(),
             writable: false,
             enumerable: false,
         })
-        TaskList.#AllTaskLists[this.ID]=this;
+        TaskList.#AllTaskLists[this.id]=this;
     }
 
     insertChronologically(currTask){
@@ -51,8 +51,12 @@ class TaskList{
 class Task{
     static #AllTasks=new TaskList();
 
+    static findById(id){
+        return this.#AllTasks[id];
+    }
+
     static get all(){   //wont expose the object, but will provide a reference that can be used by intended parties
-        return this.#AllTasks.ID;
+        return this.#AllTasks.id;
     }
 
     static remove(task){
@@ -63,14 +67,17 @@ class Task{
     #taskName;    
     #taskDate;
     #taskID;
+    #projID;
     #done=false;
 
     constructor(name,date,projID){
         this.#taskName=name;
         this.#taskDate=date;
         this.#taskID=uuid();
-        if(projID)
+        if(projID){
+            this.#projID=projID;
             Project.findById(projID).addTask(this);
+        }
         
         Task.#AllTasks.insertChronologically(this);
         pubsub.publish('tasksChanged');
@@ -93,7 +100,10 @@ class Task{
     }
 
     delete(){
-        Task.remove(this)
+        Task.remove(this);
+        if(this.#projID)
+            Project.findById(this.#projID).removeTask(this);
+        pubsub.publish('tasksChanged');
     }
 
     toggleDone(){
