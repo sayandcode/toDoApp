@@ -48,6 +48,9 @@ nav{
         .projectName{
             cursor: pointer;
         }
+        &:hover .hoverOptions{
+            visibility: visible;
+        }
     }
     
     #newProjectFromNav{

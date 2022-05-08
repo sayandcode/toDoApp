@@ -3,6 +3,7 @@ import newProjectModal from '../modals/newProjectModal.js'
 import pubsub from "./pubsub.js";
 import renderMethods from '../pages/renderMethods.js'
 import generateNavbarProjects from '../pages/navbarProjects.js'
+import contextMenu from './contextMenu.js';
 
 //cache DOM
 let currTab='allTasksTab';
@@ -26,6 +27,7 @@ tabs.forEach(tab=>tab.addEventListener('click',function(){
 }));
 pubsub.subscribe('tasksChanged',renderRightSide);
 pubsub.subscribe('projectsChanged',renderNavbarProjects);
+pubsub.subscribe('hoverOptionsClicked',showContextMenu)
 
 
 function renderRightSide(){
@@ -52,4 +54,8 @@ function switchTab(clickedTab){
     currTab=clickedTab.id;
     logo.textContent= (currTab==='homeTab')? 'To Do App' : clickedTab.textContent;
     renderRightSide();
+}
+
+function showContextMenu(data){
+    contextMenu.render(data);
 }

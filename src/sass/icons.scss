@@ -18,11 +18,9 @@ $icon-width:1.5em;
 }
 
 .hoverOptions{
-    position: relative;
-    &:hover::after,&:active::after{
-        content: '\f142';
-        position: absolute;
-        right: 0;
-        cursor: pointer;
-    }
+    &::after{content: '\f142';}
+    cursor: pointer;
+    text-align: center;
+    visibility: hidden;
+    float: right;
 }
