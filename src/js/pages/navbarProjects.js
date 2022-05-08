@@ -23,6 +23,8 @@ export default function generateNavbarProjects(){
             pubsub.publish('projectSlabClicked');
         })
         template.querySelector('.hoverOptions').addEventListener('click',function(event){
+            event.stopPropagation();    //in order to stop any subsequent events from firing
+            
             const boundingRect=this.getBoundingClientRect();
             const x=boundingRect.left+(boundingRect.width/2);
             const y=boundingRect.top+(boundingRect.height/2);

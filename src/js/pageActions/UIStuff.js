@@ -58,4 +58,5 @@ function switchTab(clickedTab){
 
 function showContextMenu(forClickedItem,[atPointX,atPointY]){
     const menu=contextMenu.create(forClickedItem,[atPointX,atPointY]);
+    window.addEventListener('click',()=>menu.remove(),{once:true});
 }
