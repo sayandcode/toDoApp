@@ -8,9 +8,14 @@ const pubsub=(function(){
         if(i!==-1) //dont remove the whole event, just the one function that was supposed to be called
             events[eventName].splice(i,1);
     }
-    function publish(eventName, para){
+    function publish(eventName,data){
         if(events[eventName])
-            events[eventName].forEach(fn=>fn(para));
+            events[eventName].forEach(fn=>{
+                if (Array.isArray(data))
+                    return fn(...data);
+                else
+                    return fn(data);
+        });
     }
     return{
         subscribe,

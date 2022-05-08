@@ -23,7 +23,12 @@ export default function generateNavbarProjects(){
             pubsub.publish('projectSlabClicked');
         })
         template.querySelector('.hoverOptions').addEventListener('click',function(event){
-            pubsub.publish('hoverOptionsClicked',this.parentNode.className);
+            const boundingRect=this.getBoundingClientRect();
+            const x=boundingRect.left+(boundingRect.width/2);
+            const y=boundingRect.top+(boundingRect.height/2);
+            
+            this.classList.add('clicked');
+            pubsub.publish('hoverOptionsClicked',[this.parentNode,[`${x}px`,`${y}px`]]);
         })
 
         projectSlabs.append(template);

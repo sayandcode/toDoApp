@@ -16,11 +16,3 @@ $icon-width:1.5em;
 .checkbox::before{    
     font: var(--fa-font-regular);
 }
-
-.hoverOptions{
-    &::after{content: '\f142';}
-    cursor: pointer;
-    text-align: center;
-    visibility: hidden;
-    float: right;
-}

@@ -48,7 +48,7 @@ nav{
         .projectName{
             cursor: pointer;
         }
-        &:hover .hoverOptions{
+        &:hover .hoverOptions,.hoverOptions.clicked{
             visibility: visible;
         }
     }

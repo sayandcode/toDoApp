@@ -56,6 +56,6 @@ function switchTab(clickedTab){
     renderRightSide();
 }
 
-function showContextMenu(data){
-    contextMenu.render(data);
+function showContextMenu(forClickedItem,[atPointX,atPointY]){
+    const menu=contextMenu.create(forClickedItem,[atPointX,atPointY]);
 }

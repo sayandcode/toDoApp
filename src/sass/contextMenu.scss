@@ -1,3 +1,11 @@
+.hoverOptions{
+    &::after{content: '\f142';}
+    cursor: pointer;
+    text-align: center;
+    visibility: hidden;
+    float: right;
+}
+
 .contextMenu{
     display: block;
     background-color: $lightColor;
@@ -13,11 +21,14 @@
     }
 
     //change this to event click position later
+    --x-pos:0;
+    --y-pos:0;
+
     position:absolute;
-    top: 50%;
-    right: 0 + $icon-width/2;
-    transform: translateX(100%);
+    top: var(--y-pos);
+    left: var(--x-pos);
+    // transform: translateX(100%);
     z-index: 10;
 
-    display: none;  //remove this later
+    // display: none;  //remove this later
 }
