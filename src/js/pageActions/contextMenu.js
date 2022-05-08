@@ -1,3 +1,5 @@
+import Project from "../tasks&Projects/projects";
+
 const contextMenu=(function(){
     const options={
         projectSlab:[
@@ -6,7 +8,7 @@ const contextMenu=(function(){
                 fn:()=>{alert('Hi')}},
             {
                 label:'Delete',
-                fn:()=>{alert('Deleted')}
+                fn:deleteProject,
             },
        ],
     }
@@ -21,11 +23,15 @@ const contextMenu=(function(){
         for(const option of options[itemType]){
             const li=document.createElement('li');
             li.textContent= option.label;
-            li.addEventListener('click',option.fn);
+            li.addEventListener('click',()=>option.fn(container.parentNode.key));
             container.appendChild(li);
         }
         forClickedItem.append(container);
         return container;
+    }
+
+    function deleteProject(id){
+        Project.findById(id).delete();
     }
 
     return{

@@ -13,6 +13,11 @@ export default class Project{
         return [...Object.keys(this.#AllProjects)];
     }
 
+    static remove(project){
+        delete this.#AllProjects[project.id];
+        pubsub.publish('projectsChanged');
+    }
+
     #projectName;
     #projectIcon;
     #projectID;
@@ -36,11 +41,22 @@ export default class Project{
         return this.#projectIcon;
     }
 
+    get id(){
+        return this.#projectID;
+    }
+
     addTask(newTask){
         this.#tasks.insertChronologically(newTask);
     }
 
     removeTask(task){
         delete this.#tasks[task.id];
+    }
+
+    delete(){
+        Project.remove(this);
+        for (const id in this.#tasks){
+            this.#tasks[id].delete();
+        }
     }
 }

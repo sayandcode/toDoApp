@@ -103,7 +103,6 @@ class Task{
         Task.remove(this);
         if(this.#projID)
             Project.findById(this.#projID).removeTask(this);
-        pubsub.publish('tasksChanged');
     }
 
     toggleDone(){
