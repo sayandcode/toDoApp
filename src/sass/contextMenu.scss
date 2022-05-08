@@ -20,15 +20,17 @@
         }
     }
 
-    //change this to event click position later
     --x-pos:0;
     --y-pos:0;
-
     position:absolute;
     top: var(--y-pos);
     left: var(--x-pos);
-    // transform: translateX(100%);
     z-index: 10;
 
-    // display: none;  //remove this later
+    transform-origin: top left;
+    animation: scale-open 0.1s ease-out;
+    @keyframes scale-open {
+        from{transform: scale(0);}
+        to{transform: scale(1);}
+    }
 }

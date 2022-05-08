@@ -57,6 +57,12 @@ function switchTab(clickedTab){
 }
 
 function showContextMenu(forClickedItem,[atPointX,atPointY]){
+    //close any other context menus that are open
+    const alreadyOpenMenu=document.querySelector('.contextMenu');
+    if(alreadyOpenMenu)
+        alreadyOpenMenu.remove();
+
+    //make a new context menu
     const menu=contextMenu.create(forClickedItem,[atPointX,atPointY]);
     window.addEventListener('click',()=>menu.remove(),{once:true});
 }
