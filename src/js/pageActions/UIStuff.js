@@ -27,11 +27,12 @@ tabs.forEach(tab=>tab.addEventListener('click',function(){
 }));
 pubsub.subscribe('tasksChanged',renderRightSide);
 pubsub.subscribe('projectsChanged',renderNavbarProjects);
+pubsub.subscribe('projectsChanged',renderRightSide);
 pubsub.subscribe('hoverOptionsClicked',showContextMenu);
 
 
 function renderRightSide(){
-    rightSide.innerHTML='';    //clear the page 
+    rightSide.innerHTML='';
     rightSide.append(renderMethods[currTab]());     //render new stuff
 };
 
