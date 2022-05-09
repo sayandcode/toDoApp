@@ -21,20 +21,16 @@ class TaskList{
             for (const i in requiredGroups) {
                 if(!checkingFns[i](task.date))
                     continue;
-                //if the group is already added, just append to its tasks Object
-
-                //if the group doesnt exist, create it in the groups object, and add append to its tasks Object
-                let indexOfGroup=groups.findIndex(element=>{
-                    return element[0]===requiredGroups[i];
-                });
-                console.log(indexOfGroup);
-                if (indexOfGroup===-1)
+                    
+                const currGroupName=requiredGroups[i];
+                let indexOfGroup=groups.findIndex(group=>group.name===currGroupName);
+                //if the group doesnt exist add it to the end of groups array
+                if (indexOfGroup===-1)  
                     indexOfGroup=groups.length;
-                groups[indexOfGroup]=groups[indexOfGroup]||['',{}];
-                groups[indexOfGroup][0]=requiredGroups[i];
-                Object.assign(groups[indexOfGroup][1],{[task.id]:task})
+
+                groups[indexOfGroup]=groups[indexOfGroup]||{name:currGroupName,tasks:{}};
+                Object.assign(groups[indexOfGroup].tasks,{[task.id]:task})
                 break;
-                // console.log(groups)                
             }
         }
 

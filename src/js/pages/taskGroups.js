@@ -10,19 +10,17 @@ const createTaskGroups= (function(){
             return '';
         
         const result=document.createDocumentFragment();
-        console.log(groupedTasks);
-        for (const [groupName,tasks] of groupedTasks) { //for each group
+        for (const group of groupedTasks) { //for each group
             //create heading 
             const heading=document.createElement('h2');
-            heading.textContent=groupName;
+            heading.textContent=group.name;
 
             //create taskGroup
             const taskGroup=document.createElement('ul');
             taskGroup.classList.add('taskGroup');
             
             //loop and add tasks
-            for (const taskID in tasks) {
-                const task=tasks[taskID];
+            for (const task of Object.values(group.tasks)) {
                 const template=template2Node(TaskTemplate);
                 const relativeDate=formatRelative(task.date, new Date(),{locale:enIN});
                 
