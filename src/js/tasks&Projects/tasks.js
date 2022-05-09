@@ -12,18 +12,29 @@ class TaskList{
     }
 
     static groupByDate(taskListID){
-        const Tasks=TaskList.findById(taskListID);
+        const Tasks=Object.values(TaskList.findById(taskListID));
         const groups=[];
         const requiredGroups=['In the Past','Today','Tomorrow','This Week','This Month','This Year','Coming Years ;)']
         const checkingFns=  [a=>isToday(a)?false:isPast(a),isToday,isTomorrow,isThisWeek,isThisMonth,isThisYear, ()=>true]
         
-        for (const taskID in Tasks) {
+        for (const task of Tasks) {
             for (const i in requiredGroups) {
-                if(checkingFns[i](Tasks[taskID].date)){
-                    groups[requiredGroups[i]]=groups[requiredGroups[i]]||{};
-                    Object.assign(groups[requiredGroups[i]],{[taskID]:Tasks[taskID]})
-                    break;
-                }
+                if(!checkingFns[i](task.date))
+                    continue;
+                //if the group is already added, just append to its tasks Object
+
+                //if the group doesnt exist, create it in the groups object, and add append to its tasks Object
+                let indexOfGroup=groups.findIndex(element=>{
+                    return element[0]===requiredGroups[i];
+                });
+                console.log(indexOfGroup);
+                if (indexOfGroup===-1)
+                    indexOfGroup=groups.length;
+                groups[indexOfGroup]=groups[indexOfGroup]||['',{}];
+                groups[indexOfGroup][0]=requiredGroups[i];
+                Object.assign(groups[indexOfGroup][1],{[task.id]:task})
+                break;
+                // console.log(groups)                
             }
         }
 
