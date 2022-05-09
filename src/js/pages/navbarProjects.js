@@ -21,7 +21,7 @@ export default function generateNavbarProjects(){
         //values
         projName.textContent=thisProject.name;
         projSlab.key=id;
-        projSlab.style.setProperty('--iconHex',`'${thisProject.icon}'`);
+        projSlab.style.setProperty('--iconHex',`'\\${thisProject.icon}'`);
         
         //eventListeners
         projName.addEventListener('click',function(){

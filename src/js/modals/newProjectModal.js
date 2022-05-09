@@ -15,47 +15,57 @@ export default function newProjectModal(){
     const iconSelector=form.querySelector('.iconSelector');
     const cancelBtn=modal.querySelector('.cancelBtn');
 
-    //default value
-    projName.value=this.value;
-    this.value='';  //clear the nav input box
-
     //create Icons
     const icons={
-        partyIcon: '\\f79f',
-        birthdayIcon: '\\f1fd',
-        schoolIcon: '\\f19d',
-        workIcon: '\\f0b1',
-        wrenchIcon: '\\f0ad'
+        partyIcon: 'f79f',
+        birthdayIcon: 'f1fd',
+        schoolIcon: 'f19d',
+        workIcon: 'f0b1',
+        wrenchIcon: 'f0ad'
     }
     for(const icon in icons){
         const radioBtn=document.createElement('input');
         const radioLabel=document.createElement('label');
 
-        const radioAttrs={type:'radio',name:'iconSelector',id:icon};
+        const radioAttrs={type:'radio',name:'iconSelector',id:icon,value:icons[icon]};
         for(const attr in radioAttrs)
             radioBtn.setAttribute(attr,radioAttrs[attr]);
-        radioBtn.value=icons[icon];
 
         const labelAttrs={class:"icon",for:icon};
         for(const attr in labelAttrs)
             radioLabel.setAttribute(attr,labelAttrs[attr]);
-        radioLabel.style.setProperty('--iconHex',`'${icons[icon]}'`);
+        radioLabel.style.setProperty('--iconHex',`'\\${icons[icon]}'`);
 
         iconSelector.append(radioBtn,radioLabel);
     }
 
+    /* default values */
+    switch (this.constructor.name){
+        case 'HTMLInputElement':
+            projName.value=this.value;
+            this.value='';  //clear the nav input box
+            break;
+
+        case 'Project':
+            var project=this;
+            projName.value=this.name;
+            const selectedIcon=iconSelector.querySelector(`input[value="${this.icon}"]`);
+            if (selectedIcon)
+                selectedIcon.checked=true;
+            break;
+    }
 
     //listeners
     listen();
 
 
     function listen(){
-        form.addEventListener('submit', createProject);
+        form.addEventListener('submit', createOrEditProject);
         cancelBtn.addEventListener('click', closeModal);
     }
     
     function stopListening(){
-        form.removeEventListener('submit', createProject)
+        form.removeEventListener('submit', createOrEditProject)
         cancelBtn.removeEventListener('click', closeModal);
     }
 
@@ -64,9 +74,12 @@ export default function newProjectModal(){
         modal.remove();
     }
 
-    function createProject(event){
+    function createOrEditProject(event){
         const userInputs=createProjectFromInputs(event);
-        new Project(...userInputs);
+        if(!project)
+            new Project(...userInputs);
+        else
+            project.edit(...userInputs);
         closeModal();
     }
 }

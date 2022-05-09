@@ -1,3 +1,4 @@
+import newProjectModal from "../modals/newProjectModal";
 import Project from "../tasks&Projects/projects";
 import { Task } from "../tasks&Projects/tasks";
 
@@ -6,7 +7,8 @@ const contextMenu=(function(){
         project:[
             {
                 label:'Edit Project',
-                fn:()=>{alert('Hi')}},
+                fn:editProject,
+            },
             {
                 label:'Delete',
                 fn:deleteProject,
@@ -38,16 +40,23 @@ const contextMenu=(function(){
 
     }
 
-    function deleteProject(id){
-        Project.findById(id).delete();
-    }
-
     function findType(id){
         if (Project.findById(id))
             return 'project';
         else if (Task.findById(id))
             return 'task';
     }
+
+    function editProject(id){
+        const proj=Project.findById(id);
+        newProjectModal.call(proj);
+    }
+
+    function deleteProject(id){
+        Project.findById(id).delete();
+    }
+
+
 
     return{
         create,

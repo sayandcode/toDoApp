@@ -27,7 +27,7 @@ tabs.forEach(tab=>tab.addEventListener('click',function(){
 }));
 pubsub.subscribe('tasksChanged',renderRightSide);
 pubsub.subscribe('projectsChanged',renderNavbarProjects);
-pubsub.subscribe('hoverOptionsClicked',showContextMenu)
+pubsub.subscribe('hoverOptionsClicked',showContextMenu);
 
 
 function renderRightSide(){
@@ -63,6 +63,6 @@ function showContextMenu(forClickedItem,[atPointX,atPointY]){
         alreadyOpenMenu.remove();
 
     //make a new context menu
-    const menu=contextMenu.create(forClickedItem,[atPointX,atPointY]);
+    contextMenu.create(forClickedItem,[atPointX,atPointY]);
     window.addEventListener('click',()=>contextMenu.remove(forClickedItem),{once:true});
 }

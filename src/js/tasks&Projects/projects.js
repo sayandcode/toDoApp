@@ -23,7 +23,7 @@ export default class Project{
     #projectID;
     #tasks;
 
-    constructor(name,icon='\\f0ae'){
+    constructor(name,icon){
         this.#projectName=name;
         this.#projectIcon=icon;
         this.#projectID=uuid();
@@ -51,6 +51,12 @@ export default class Project{
 
     removeTask(task){
         delete this.#tasks[task.id];
+    }
+
+    edit(name,icon){
+        this.#projectName=name;
+        this.#projectIcon=icon;
+        pubsub.publish('projectsChanged');
     }
 
     delete(){
