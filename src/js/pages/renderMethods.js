@@ -3,9 +3,9 @@ import homePage from '../pages/homePage.js'
 import projectPage from '../pages/projectPage.js'
 
 const renderMethods={
-        'allTasksTab': allTasksPage.generate,
-        'homeTab': homePage.generate,
-        'projectsTab': projectPage.generate,
+        'allTasksTab': allTasksPage,
+        'homeTab': homePage,
+        'projectsTab': projectPage,
 }
 
 export default renderMethods;

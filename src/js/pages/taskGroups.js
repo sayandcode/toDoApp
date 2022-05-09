@@ -1,14 +1,12 @@
 import template2Node from "../utilities/template2Node.js";
 import TaskTemplate from '../../fullRenders/taskTemplate.html';
-import {Task, TaskList} from '../tasks&Projects/tasks.js'
+import { Task } from '../tasks&Projects/tasks.js'
 import { formatRelative } from "date-fns";
 import { enIN } from "date-fns/locale";
 
-const createTaskGroups= function(taskListID){
-    let groupedTasks;
-
-    function generate(){
-        groupedTasks=TaskList.groupByDate(taskListID);
+const createTaskGroups= (function(){
+    function generate(groupedTasks){
+        console.log(groupedTasks)
         if(Object.keys(groupedTasks).length===0)
             return '';
         
@@ -56,6 +54,6 @@ const createTaskGroups= function(taskListID){
     return {
         generate
     }
-}
+})();
 
 export default createTaskGroups;

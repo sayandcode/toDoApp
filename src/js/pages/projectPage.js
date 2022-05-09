@@ -1,14 +1,9 @@
-const allTasksPage= (function(){
-    function generate(){
-        const placeholder = document.createElement('p');
-        placeholder.textContent='Placeholder';
-        return placeholder;
-    }
+import Project from '../tasks&Projects/projects.js';
+import createTaskGroups from './taskGroups.js';
 
-    return{
-        generate
-    }
+const projectPage= function(){
+    
+    return createTaskGroups.generate({});
+};
 
-})();
-
-export default allTasksPage;
+export default projectPage;
