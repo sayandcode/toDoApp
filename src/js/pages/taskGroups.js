@@ -6,7 +6,6 @@ import { enIN } from "date-fns/locale";
 
 const createTaskGroups= (function(){
     function generate(groupedTasks){
-        console.log(groupedTasks)
         if(Object.keys(groupedTasks).length===0)
             return '';
         
@@ -21,7 +20,9 @@ const createTaskGroups= (function(){
             taskGroup.classList.add('taskGroup');
             
             //loop and add tasks
-            for (const task of groupedTasks[group]) {
+            console.log(groupedTasks);
+            for (const taskID in groupedTasks[group]) {
+                const task=groupedTasks[group][taskID];
                 const template=template2Node(TaskTemplate);
                 const relativeDate=formatRelative(task.date, new Date(),{locale:enIN});
                 

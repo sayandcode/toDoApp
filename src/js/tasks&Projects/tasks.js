@@ -20,7 +20,8 @@ class TaskList{
         for (const taskID in Tasks) {
             for (const i in requiredGroups) {
                 if(checkingFns[i](Tasks[taskID].date)){
-                    groups.makeOrPush(Tasks[taskID],requiredGroups[i])
+                    groups[requiredGroups[i]]=groups[requiredGroups[i]]||{};
+                    Object.assign(groups[requiredGroups[i]],{[taskID]:Tasks[taskID]})
                     break;
                 }
             }
