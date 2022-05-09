@@ -14,6 +14,7 @@ const contextMenu=(function(){
        ],
     }
     function create(forClickedItem,[atPointX,atPointY]){
+        forClickedItem.querySelector('.hoverOptions').classList.add('clicked');   //make the hoverOptions persistent
         const itemType=findType(forClickedItem.key);
 
         const container=document.createElement('ul');
@@ -31,6 +32,12 @@ const contextMenu=(function(){
         return container;
     }
 
+    function remove(forClickedItem){
+        forClickedItem.querySelector('.contextMenu').remove();  
+        forClickedItem.querySelector('.hoverOptions').classList.remove('clicked');    //make the hoverOptions on hover only
+
+    }
+
     function deleteProject(id){
         Project.findById(id).delete();
     }
@@ -44,6 +51,7 @@ const contextMenu=(function(){
 
     return{
         create,
+        remove
     }
 })();
 

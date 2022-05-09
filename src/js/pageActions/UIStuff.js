@@ -64,5 +64,5 @@ function showContextMenu(forClickedItem,[atPointX,atPointY]){
 
     //make a new context menu
     const menu=contextMenu.create(forClickedItem,[atPointX,atPointY]);
-    window.addEventListener('click',()=>menu.remove(),{once:true});
+    window.addEventListener('click',()=>contextMenu.remove(forClickedItem),{once:true});
 }
