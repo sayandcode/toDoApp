@@ -1,7 +1,18 @@
-.projectTasks{
+.projectsTab{
     .newProjectCard{
         height: 50px;
         width: 200px;
         margin: 2em auto;
+    }
+}
+
+.taskGroup:empty{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &::before{
+        content: 'No tasks';
+        font-size: 1.25rem;
+        font-weight: 500;
     }
 }

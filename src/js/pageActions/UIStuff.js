@@ -20,7 +20,7 @@ const projectsTab=document.getElementById('projectsTab');
 FAB.addEventListener('click',newTaskModal);
 newProjectFromNav.addEventListener('keydown',function(e){
     if(e.key ==='Enter')
-        newProjectModal.call(this);
+        pubsub.publish('openProjectModal',this);
 });
 tabs.forEach(tab=>tab.addEventListener('click',function(){
     switchTab(this)
@@ -29,6 +29,7 @@ pubsub.subscribe('tasksChanged',renderRightSide);
 pubsub.subscribe('projectsChanged',renderNavbarProjects);
 pubsub.subscribe('projectsChanged',renderRightSide);
 pubsub.subscribe('hoverOptionsClicked',showContextMenu);
+pubsub.subscribe('openProjectModal',newProjectModalFor)
 
 
 function renderRightSide(){
@@ -54,6 +55,7 @@ function switchTab(clickedTab){
         return;
     currTab=clickedTab.id;
     logo.textContent= (currTab==='homeTab')? 'To Do App' : clickedTab.textContent;
+    rightSide.className=currTab;
     renderRightSide();
 }
 
@@ -66,4 +68,8 @@ function showContextMenu(forClickedItem,[atPointX,atPointY]){
     //make a new context menu
     contextMenu.create(forClickedItem,[atPointX,atPointY]);
     window.addEventListener('click',()=>contextMenu.remove(forClickedItem),{once:true});
+}
+
+function newProjectModalFor(This){
+    newProjectModal.call(This);
 }

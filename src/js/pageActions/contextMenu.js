@@ -1,6 +1,6 @@
-import newProjectModal from "../modals/newProjectModal";
 import Project from "../tasks&Projects/projects";
 import { Task } from "../tasks&Projects/tasks";
+import pubsub from "./pubsub";
 
 const contextMenu=(function(){
     const options={
@@ -49,7 +49,7 @@ const contextMenu=(function(){
 
     function editProject(id){
         const proj=Project.findById(id);
-        newProjectModal.call(proj);
+        pubsub.publish('openProjectModal',proj)
     }
 
     function deleteProject(id){
