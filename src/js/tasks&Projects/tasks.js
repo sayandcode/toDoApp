@@ -13,7 +13,7 @@ class TaskList{
 
     static groupByDate(taskListID){
         const Tasks=TaskList.findById(taskListID);
-        const groups={};
+        const groups=[];
         const requiredGroups=['In the Past','Today','Tomorrow','This Week','This Month','This Year','Coming Years ;)']
         const checkingFns=  [a=>isToday(a)?false:isPast(a),isToday,isTomorrow,isThisWeek,isThisMonth,isThisYear, ()=>true]
         

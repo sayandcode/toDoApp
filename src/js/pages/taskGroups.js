@@ -10,6 +10,7 @@ const createTaskGroups= (function(){
             return '';
         
         const result=document.createDocumentFragment();
+        console.log(groupedTasks);
         for (const group in groupedTasks) { //for each group
             //create heading 
             const heading=document.createElement('h2');
@@ -20,7 +21,6 @@ const createTaskGroups= (function(){
             taskGroup.classList.add('taskGroup');
             
             //loop and add tasks
-            console.log(groupedTasks);
             for (const taskID in groupedTasks[group]) {
                 const task=groupedTasks[group][taskID];
                 const template=template2Node(TaskTemplate);

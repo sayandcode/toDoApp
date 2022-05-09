@@ -45,6 +45,10 @@ export default class Project{
         return this.#projectID;
     }
 
+    get tasks(){
+        return Object.assign({},this.#tasks);
+    }
+
     addTask(newTask){
         this.#tasks.insertChronologically(newTask);
     }
