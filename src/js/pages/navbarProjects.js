@@ -12,17 +12,22 @@ export default function generateNavbarProjects(){
     allProjectIDs.forEach(id=>{
         const thisProject=Project.findById(id);
         const template=template2Node(slabTemplate);
-        
+
+        //cache DOM
+        const projName=template.querySelector('.projectName');
+        const projSlab=template.querySelector('.projectSlab');
+        const hoverOptions=template.querySelector('.hoverOptions');
+
         //values
-        template.querySelector('.projectName').textContent=thisProject.name;
-        template.querySelector('.projectSlab').key=id;
-        template.querySelector('.projectSlab').style.setProperty('--iconHex',`'${thisProject.icon}'`);
+        projName.textContent=thisProject.name;
+        projSlab.key=id;
+        projSlab.style.setProperty('--iconHex',`'${thisProject.icon}'`);
         
         //eventListeners
-        template.querySelector('.projectName').addEventListener('click',function(){
+        projName.addEventListener('click',function(){
             pubsub.publish('projectSlabClicked');
         })
-        template.querySelector('.hoverOptions').addEventListener('click',function(event){
+        hoverOptions.addEventListener('click',function(event){
             event.stopPropagation();    //in order to stop any subsequent events from firing
 
             const boundingRect=this.getBoundingClientRect();
