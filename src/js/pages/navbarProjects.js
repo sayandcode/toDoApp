@@ -20,7 +20,6 @@ export default function generateNavbarProjects(){
 
         //values
         projName.textContent=thisProject.name;
-        projSlab.key=id;
         projSlab.style.setProperty('--iconHex',`'\\${thisProject.icon}'`);
         
         //eventListeners
@@ -34,7 +33,8 @@ export default function generateNavbarProjects(){
             const x=boundingRect.left+(boundingRect.width/2);
             const y=boundingRect.top+(boundingRect.height/2);
             
-            pubsub.publish('hoverOptionsClicked',[this.parentNode,[`${x}px`,`${y}px`]]);
+            this.classList.add('clicked');   //make the hoverOptions persistent
+            pubsub.publish('hoverOptionsClicked',[id,[`${x}px`,`${y}px`]]);
         })
 
         projectSlabs.append(template);

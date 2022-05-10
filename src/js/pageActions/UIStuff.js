@@ -63,15 +63,13 @@ function switchTab(clickedTab){
     renderRightSide();
 }
 
-function showContextMenu(forClickedItem,[atPointX,atPointY]){
+function showContextMenu(forID,[atPointX,atPointY]){
     //close any other context menus that are open
-    const alreadyOpenMenu=document.querySelector('.contextMenu');
-    if(alreadyOpenMenu)
-        alreadyOpenMenu.remove();
+    contextMenu.closeAll();
 
     //make a new context menu
-    contextMenu.create(forClickedItem,[atPointX,atPointY]);
-    window.addEventListener('click',()=>contextMenu.remove(forClickedItem),{once:true});
+    contextMenu.create(forID,[atPointX,atPointY]);
+    window.addEventListener('click',()=>contextMenu.closeAll(),{once:true});
 }
 
 function newProjectModalFor(This){

@@ -15,9 +15,8 @@ const contextMenu=(function(){
             },
        ],
     }
-    function create(forClickedItem,[atPointX,atPointY]){
-        forClickedItem.querySelector('.hoverOptions').classList.add('clicked');   //make the hoverOptions persistent
-        const itemType=findType(forClickedItem.key);
+    function create(forID,[atPointX,atPointY]){
+        const itemType=findType(forID);
 
         const container=document.createElement('ul');
         container.classList.add('contextMenu');
@@ -27,17 +26,19 @@ const contextMenu=(function(){
         for(const option of options[itemType]){
             const li=document.createElement('li');
             li.textContent= option.label;
-            li.addEventListener('click',()=>option.fn(container.parentNode.key));
+            li.addEventListener('click',()=>option.fn(forID));
             container.appendChild(li);
         }
-        forClickedItem.append(container);
+        document.body.append(container);
         return container;
     }
 
-    function remove(forClickedItem){
-        forClickedItem.querySelector('.contextMenu').remove();  
-        forClickedItem.querySelector('.hoverOptions').classList.remove('clicked');    //make the hoverOptions on hover only
-
+    function closeAll(){
+        const openMenu=document.querySelector('.contextMenu');
+        if(openMenu){
+            openMenu.parentElement.classList.remove('clicked');    //make the hoverOptions on hover only
+            openMenu.remove();  
+        }
     }
 
     function findType(id){
@@ -60,7 +61,7 @@ const contextMenu=(function(){
 
     return{
         create,
-        remove
+        closeAll
     }
 })();
 
