@@ -63,13 +63,23 @@ function switchTab(clickedTab){
     renderRightSide();
 }
 
-function showContextMenu(forID,[atPointX,atPointY]){
+function showContextMenu(forID,clickedItem){
+
+    const boundingRect=clickedItem.getBoundingClientRect();
+    const x=`${boundingRect.left+(boundingRect.width/2)}px`;
+    const y=`${boundingRect.top+(boundingRect.height/2)}px`;
+    
+    clickedItem.classList.add('clicked');   //make the hoverOptions persistent
+    
     //close any other context menus that are open
     contextMenu.closeAll();
 
     //make a new context menu
-    contextMenu.create(forID,[atPointX,atPointY]);
-    window.addEventListener('click',()=>contextMenu.closeAll(),{once:true});
+    contextMenu.create(forID,[x,y]);
+    window.addEventListener('click',()=>{
+        contextMenu.closeAll();
+        clickedItem.classList.remove('clicked');    //make the hoverOptions on hover only
+    },{once:true});
 }
 
 function newProjectModalFor(This){

@@ -13,13 +13,22 @@ const createTaskGroups= (function(){
         const result=document.createDocumentFragment();
         for (const group of groupedTasks) { //for each group
             //create heading 
-            const heading=document.createElement('h2');
-            heading.textContent=group.name;
+            const heading=document.createElement('div');
+            const headingText=heading.appendChild(document.createElement('h2'));
+            headingText.textContent=group.name;
 
             //add listener in case group has dedicated page
             if(group.id){
-                heading.style.cursor='pointer';
-                heading.addEventListener('click',()=>pubsub.publish('individualProjectClicked',group.id));
+                headingText.style.cursor='pointer';
+                const hoverOptions=heading.appendChild(document.createElement('span'));
+                hoverOptions.className='hoverOptions';
+                heading.classList.add('hoverOptionsParent');
+
+                headingText.addEventListener('click',()=>pubsub.publish('individualProjectClicked',group.id));
+                hoverOptions.addEventListener('click',function(event){
+                    event.stopPropagation();
+                    pubsub.publish('hoverOptionsClicked',[id,this]);
+                })
             }
 
             //create taskGroup

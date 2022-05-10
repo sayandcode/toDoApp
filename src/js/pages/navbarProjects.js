@@ -14,8 +14,8 @@ export default function generateNavbarProjects(){
         const template=template2Node(slabTemplate);
 
         //cache DOM
-        const projName=template.querySelector('.projectName');
         const projSlab=template.querySelector('.projectSlab');
+        const projName=template.querySelector('.projectName');
         const hoverOptions=template.querySelector('.hoverOptions');
 
         //values
@@ -27,14 +27,8 @@ export default function generateNavbarProjects(){
             pubsub.publish('projectSlabClicked');
         })
         hoverOptions.addEventListener('click',function(event){
-            event.stopPropagation();    //in order to stop any subsequent events from firing
-
-            const boundingRect=this.getBoundingClientRect();
-            const x=boundingRect.left+(boundingRect.width/2);
-            const y=boundingRect.top+(boundingRect.height/2);
-            
-            this.classList.add('clicked');   //make the hoverOptions persistent
-            pubsub.publish('hoverOptionsClicked',[id,[`${x}px`,`${y}px`]]);
+            event.stopPropagation();
+            pubsub.publish('hoverOptionsClicked',[id,this]);
         })
 
         projectSlabs.append(template);

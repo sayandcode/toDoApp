@@ -1,3 +1,9 @@
+.hoverOptionsParent{
+    &:hover .hoverOptions,.hoverOptions.clicked{
+        visibility: visible;
+    }   
+}
+
 .hoverOptions{
     &::after{content: '\f142';}
     cursor: pointer;
