@@ -32,11 +32,6 @@
             cursor: pointer;
         }
 
-        .nextDeadline::before{
-                content: 'Next Deadline:';
-                display: block;
-        }
-
         transition: box-shadow 0.2s;
         &:hover{
             box-shadow: 0px 5px 10px $darkColor;

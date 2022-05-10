@@ -21,9 +21,9 @@ const projectPage= function(){
     const newProjCard=document.createElement('div');
     newProjCard.textContent='New Project ➕';
     newProjCard.className='newProjectCard';
-    newProjCard.addEventListener('click',()=>pubsub.publish('openProjectModal',this))
-
-    template.appendChild(newProjCard)
+    newProjCard.addEventListener('click',()=>pubsub.publish('openProjectModal',this));
+    template.appendChild(newProjCard);
+    
 
     return template;
 };

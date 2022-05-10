@@ -6,6 +6,7 @@ import homePageProjectSectionTemplate from '../../fullRenders/homePageProjectSec
 import projectCardTemplate from '../../fullRenders/projectCardTemplate.html';
 import { formatRelative, isBefore, isFuture } from "date-fns";
 import { enIN } from "date-fns/locale";
+import pubsub from "../pageActions/pubsub";
 
 const homePage= function(){
     const result=document.createDocumentFragment()
@@ -21,7 +22,7 @@ const homePage= function(){
     if(displayedTasks.length!==0)
         result.appendChild(createTaskGroups.generate(displayedTasks));
     
-    //find and show if there are any projects
+    //find and show if there are any projects, otherwise return ''
     const allProjects=Project.all;
     if(Object.keys(allProjects).length===0)
         return result;
@@ -39,6 +40,14 @@ const homePage= function(){
         projectCards.appendChild(projectCard);
     }
 
+    //add 'new Project card' to end of projectCards
+    const newProjCard=document.createElement('div');
+    newProjCard.textContent='New Project ➕';
+    newProjCard.className='newProjectCard';
+    newProjCard.addEventListener('click',()=>pubsub.publish('openProjectModal',this));
+    projectCards.appendChild(newProjCard);
+
+    //and finally return the result
     return result;
 };
 
@@ -53,19 +62,19 @@ function findRemainingTasks(project){
 function findNextDeadline(project){
     console.log(Object.values(project.tasks))
     const taskDates=Object.values(project.tasks).reduce((comingDates,task)=>{
-        if(isFuture(task.date))
+        if ( isFuture(task.date) && !task.status )
             comingDates.push(task.date);
         return comingDates;
     },[]);
     console.log(taskDates);
     if(taskDates.length===0)
-        return '';
+        return 'No deadlines';
     
     const earliest=taskDates.reduce((earliestDate,thisDate)=>{
         return isBefore(thisDate,earliestDate)? thisDate : earliestDate;
     })
 
-    return formatRelative(earliest, new Date(),{locale:enIN});
+    return `Next Deadline: ${formatRelative(earliest, new Date(),{locale:enIN})}`;
 }
 
 export default homePage;
