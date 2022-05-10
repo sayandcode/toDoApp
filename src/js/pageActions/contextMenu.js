@@ -39,7 +39,8 @@ const contextMenu=(function(){
             return;
         openMenu.remove();  
         const clicked=document.querySelector('.hoverOptions.clicked');
-        clicked.classList.remove('clicked');    //make the hoverOptions on hover only
+        if(clicked)
+            clicked.classList.remove('clicked');    //make the hoverOptions on hover only
     }
 
     function findType(id){

@@ -6,7 +6,7 @@ import generateNavbarProjects from '../pages/navbarProjects.js'
 import contextMenu from './contextMenu.js';
 
 //cache DOM
-let currTab='allTasksTab';
+let currTab='homeTab';
 const logo=document.getElementById('logo');
 const rightSide = document.getElementById('rightSide');
 const FAB=document.getElementById('FAB');
@@ -15,6 +15,8 @@ const newProjectFromNav=document.getElementById('newProjectFromNav');
 const navbarProjects=document.getElementById('projectsTab').parentElement;
 const projectsTab=document.getElementById('projectsTab');
 
+//initialize
+renderRightSide();
 
 //listening
 FAB.addEventListener('click',newTaskModal);
@@ -37,6 +39,13 @@ pubsub.subscribe('openProjectModal',newProjectModalFor);
 
 
 function renderRightSide(id){
+    //logo reset
+    logo.textContent= (currTab==='homeTab')? 'To Do App' : document.getElementById(currTab).textContent;
+    logo.style.removeProperty('--optional-icon');
+    logo.className='';
+
+    rightSide.className=currTab;
+
     rightSide.innerHTML='';
     rightSide.append(renderMethods[currTab](id));     //render new stuff
 };
@@ -60,12 +69,6 @@ function switchTab(clickedTab){
 
     currTab=clickedTab.id;
     
-    //logo reset
-    logo.textContent= (currTab==='homeTab')? 'To Do App' : clickedTab.textContent;
-    logo.style.removeProperty('--optional-icon');
-    logo.className='';
-
-    rightSide.className=currTab;
     renderRightSide();
 }
 
