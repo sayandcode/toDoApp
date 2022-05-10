@@ -18,12 +18,12 @@ export default function newTaskModal(){
     const cancelBtn=modal.querySelector('.cancelBtn');
 
     //listProjects
-    Project.allIDs.forEach(id=>{
+    for (const project of Object.values(Project.all)){
         const option=document.createElement('option');
-        option.textContent=Project.findById(id).name;
-        option.value=id;
+        option.textContent=project.name;
+        option.value=project.id;
         chooseProject.appendChild(option);  
-    });
+    }
 
     //default value
     const defaultTaskDate=add(new Date(),{days:1}); 

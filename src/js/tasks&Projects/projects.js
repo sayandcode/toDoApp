@@ -9,8 +9,8 @@ export default class Project{
         return this.#AllProjects[id];
     }
 
-    static get allIDs(){
-        return [...Object.keys(this.#AllProjects)];
+    static get all(){ //wont expose the object, but will provide a copy that can be used by intended parties
+        return Object.assign({},this.#AllProjects);
     }
 
     static remove(project){
