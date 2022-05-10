@@ -4,6 +4,8 @@ import createTaskGroups from "./taskGroups";
 import template2Node from "../utilities/template2Node";
 import homePageProjectSectionTemplate from '../../fullRenders/homePageProjectSectionTemplate.html';
 import projectCardTemplate from '../../fullRenders/projectCardTemplate.html';
+import { formatRelative, isBefore, isFuture } from "date-fns";
+import { enIN } from "date-fns/locale";
 
 const homePage= function(){
     const result=document.createDocumentFragment()
@@ -41,11 +43,29 @@ const homePage= function(){
 };
 
 function findRemainingTasks(project){
-    return '1';
+    let count=0;
+    for(const task of Object.values(project.tasks)){
+        count+= (task.status==false)? 1:0;
+    }
+    return count;
 }
 
 function findNextDeadline(project){
-    return '2nd March';
+    console.log(Object.values(project.tasks))
+    const taskDates=Object.values(project.tasks).reduce((comingDates,task)=>{
+        if(isFuture(task.date))
+            comingDates.push(task.date);
+        return comingDates;
+    },[]);
+    console.log(taskDates);
+    if(taskDates.length===0)
+        return '';
+    
+    const earliest=taskDates.reduce((earliestDate,thisDate)=>{
+        return isBefore(thisDate,earliestDate)? thisDate : earliestDate;
+    })
+
+    return formatRelative(earliest, new Date(),{locale:enIN});
 }
 
 export default homePage;

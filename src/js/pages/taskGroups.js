@@ -60,6 +60,10 @@ const createTaskGroups= (function(){
     function toggleCheck(id){
         this.classList.toggle('checked');
         Task.findById(id).toggleDone();
+
+        //render the whole page, only if we are on the homePage, so that the project Cards can be updated
+        if (document.getElementById('rightSide').classList.contains('homeTab'))
+            pubsub.publish('tasksChanged');
     }
 
     function deleteTask(id){
