@@ -5,14 +5,9 @@ import Project from './projects.js';
 import '../utilities/Custom Object Functions.js'
 
 class TaskList{
-    static #AllTaskLists={};
-    
-    static findById(id){
-        return this.#AllTaskLists[id];
-    }
 
-    static groupByDate(taskListID){
-        const Tasks=Object.values(TaskList.findById(taskListID));
+    static groupByDate(tasks){
+        const Tasks=Object.values(tasks);
         const groups=[];
         const requiredGroups=['In the Past','Today','Tomorrow','This Week','This Month','This Year','Coming Years ;)']
         const checkingFns=  [a=>isToday(a)?false:isPast(a),isToday,isTomorrow,isThisWeek,isThisMonth,isThisYear, ()=>true]
@@ -43,7 +38,6 @@ class TaskList{
             writable: false,
             enumerable: false,
         })
-        TaskList.#AllTaskLists[this.id]=this;
     }
 
     insertChronologically(currTask){
@@ -63,8 +57,8 @@ class Task{
         return this.#AllTasks[id];
     }
 
-    static get all(){   //wont expose the object, but will provide a reference that can be used by intended parties
-        return this.#AllTasks.id;
+    static get all(){   //wont expose the object, but will provide a copy that can be used by intended parties
+        return Object.assign({},this.#AllTasks);
     }
 
     static remove(task){

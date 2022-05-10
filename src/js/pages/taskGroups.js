@@ -3,6 +3,7 @@ import TaskTemplate from '../../fullRenders/taskTemplate.html';
 import { Task } from '../tasks&Projects/tasks.js'
 import { formatRelative } from "date-fns";
 import { enIN } from "date-fns/locale";
+import pubsub from "../pageActions/pubsub.js";
 
 const createTaskGroups= (function(){
     function generate(groupedTasks){
@@ -15,6 +16,12 @@ const createTaskGroups= (function(){
             const heading=document.createElement('h2');
             heading.textContent=group.name;
 
+            //add listener in case group has dedicated page
+            if(group.id){
+                heading.style.cursor='pointer';
+                heading.addEventListener('click',()=>pubsub.publish('individualProjectClicked',group.id));
+            }
+
             //create taskGroup
             const taskGroup=document.createElement('ul');
             taskGroup.classList.add('taskGroup');
@@ -23,16 +30,16 @@ const createTaskGroups= (function(){
             for (const task of Object.values(group.tasks)) {
                 const template=template2Node(TaskTemplate);
                 const relativeDate=formatRelative(task.date, new Date(),{locale:enIN});
+                const checkbox=template.querySelector('.checkbox');
                 
-                template.querySelector('li.task').key=task.id;
                 template.querySelector('.taskName').textContent=task.name;
                 template.querySelector('.deadline').textContent=`Deadline: ${relativeDate}`;
                 if(task.status)
-                    template.querySelector('.checkbox').classList.add('checked');
+                    checkbox.classList.add('checked');
 
                 //add Event Listeners
-                template.querySelector('.checkbox').addEventListener('click',toggleCheck)
-                template.querySelector('.deleteBtn').addEventListener('click',deleteTask)
+                checkbox.addEventListener('click',toggleCheck.bind(checkbox,task.id))
+                template.querySelector('.deleteBtn').addEventListener('click',deleteTask.bind(null,task.id))
 
                 taskGroup.append(template);
             }
@@ -41,13 +48,13 @@ const createTaskGroups= (function(){
         return result;
     }
     
-    function toggleCheck(e){
+    function toggleCheck(id){
         this.classList.toggle('checked');
-        Task.findById(e.target.parentNode.key).toggleDone();
+        Task.findById(id).toggleDone();
     }
 
-    function deleteTask(e){
-        Task.findById(e.target.parentNode.key).delete();
+    function deleteTask(id){
+        Task.findById(id).delete();
     }
 
     return {

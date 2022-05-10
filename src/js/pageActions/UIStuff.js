@@ -25,16 +25,20 @@ newProjectFromNav.addEventListener('keydown',function(e){
 tabs.forEach(tab=>tab.addEventListener('click',function(){
     switchTab(this)
 }));
+pubsub.subscribe('individualProjectClicked',(id)=>{
+    currTab='individualProject';
+    renderRightSide(id);
+})
 pubsub.subscribe('tasksChanged',renderRightSide);
 pubsub.subscribe('projectsChanged',renderNavbarProjects);
 pubsub.subscribe('projectsChanged',renderRightSide);
 pubsub.subscribe('hoverOptionsClicked',showContextMenu);
-pubsub.subscribe('openProjectModal',newProjectModalFor)
+pubsub.subscribe('openProjectModal',newProjectModalFor);
 
 
-function renderRightSide(){
+function renderRightSide(id){
     rightSide.innerHTML='';
-    rightSide.append(renderMethods[currTab]());     //render new stuff
+    rightSide.append(renderMethods[currTab](id));     //render new stuff
 };
 
 function renderNavbarProjects(){

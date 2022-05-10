@@ -8,7 +8,11 @@ const projectPage= function(){
     const allprojects=[];
     for(const id of Project.allIDs){
         const proj=Project.findById(id);
-        allprojects.push({name:proj.name,tasks:proj.tasks});
+        allprojects.push({
+            name:proj.name,
+            tasks:proj.tasks,
+            id
+        });
     }
 
     if(allprojects.length!==0)
