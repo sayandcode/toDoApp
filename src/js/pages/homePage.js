@@ -32,10 +32,17 @@ const homePage= function(){
     const projectCards=result.querySelector('.projectCards');
     for(const project of Object.values(allProjects)){
         const projectCard=template2Node(projectCardTemplate);
+
+        //cacheDOM
+        const projectName=projectCard.querySelector('.projectName');
         
-        projectCard.querySelector('.projectName').textContent=project.name;
+        //enter values
+        projectName.textContent=project.name;
         projectCard.querySelector('.noOfTasks').textContent=`${findRemainingTasks(project)} tasks left`;
         projectCard.querySelector('.nextDeadline').textContent=findNextDeadline(project);
+
+        //add event listeners
+        projectName.addEventListener('click',()=>pubsub.publish('individualProjectClicked',project.id));
 
         projectCards.appendChild(projectCard);
     }
