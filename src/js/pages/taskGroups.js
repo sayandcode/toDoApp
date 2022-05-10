@@ -27,7 +27,7 @@ const createTaskGroups= (function(){
                 headingText.addEventListener('click',()=>pubsub.publish('individualProjectClicked',group.id));
                 hoverOptions.addEventListener('click',function(event){
                     event.stopPropagation();
-                    pubsub.publish('hoverOptionsClicked',[id,this]);
+                    pubsub.publish('hoverOptionsClicked',[group.id,this]);
                 })
             }
 

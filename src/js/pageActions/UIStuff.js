@@ -65,21 +65,17 @@ function switchTab(clickedTab){
 
 function showContextMenu(forID,clickedItem){
 
+    //find click position X and Y
     const boundingRect=clickedItem.getBoundingClientRect();
     const x=`${boundingRect.left+(boundingRect.width/2)}px`;
     const y=`${boundingRect.top+(boundingRect.height/2)}px`;
     
+    contextMenu.closeAll();                 //close any other context menus that are open
     clickedItem.classList.add('clicked');   //make the hoverOptions persistent
-    
-    //close any other context menus that are open
-    contextMenu.closeAll();
 
-    //make a new context menu
-    contextMenu.create(forID,[x,y]);
-    window.addEventListener('click',()=>{
-        contextMenu.closeAll();
-        clickedItem.classList.remove('clicked');    //make the hoverOptions on hover only
-    },{once:true});
+    contextMenu.create(forID,[x,y]);    //make a new context menu
+    
+    window.addEventListener('click',contextMenu.closeAll,{once:true});
 }
 
 function newProjectModalFor(This){

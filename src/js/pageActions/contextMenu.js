@@ -35,8 +35,11 @@ const contextMenu=(function(){
 
     function closeAll(){
         const openMenu=document.querySelector('.contextMenu');
-        if(openMenu)
-            openMenu.remove();  
+        if(!openMenu)   //abort operation if no open tabs
+            return;
+        openMenu.remove();  
+        const clicked=document.querySelector('.hoverOptions.clicked');
+        clicked.classList.remove('clicked');    //make the hoverOptions on hover only
     }
 
     function findType(id){

@@ -21,6 +21,7 @@
     li{
         list-style: none;
         padding: 0.5em 1em;
+        white-space: nowrap;
         &:hover{
             background-color: $bgC-light;
         }
@@ -33,10 +34,10 @@
     left: var(--x-pos);
     z-index: 10;
 
-    transform-origin: top left;
-    animation: scale-open 0.1s ease-out;
+    transform-origin: top right;
+    animation: scale-open 0.1s ease-out forwards;
     @keyframes scale-open {
-        from{transform: scale(0);}
-        to{transform: scale(1);}
+        from{   transform: translateX(-100%) scale(0);}
+        to{     transform: translateX(-100%) scale(1);}
     }
 }
