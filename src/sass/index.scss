@@ -21,6 +21,10 @@ body{
     padding: 0.5em 1em;
     background-color: scale-color($bgC-light, $alpha: -30%);
     z-index: 3;
+    --optional-icon:'';
+    &::before{
+        content: var(--optional-icon);
+    }
 
     grid-area: logo;
 }

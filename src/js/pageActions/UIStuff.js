@@ -57,8 +57,14 @@ function renderNavbarProjects(){
 function switchTab(clickedTab){
     if(currTab===clickedTab.id)
         return;
+
     currTab=clickedTab.id;
+    
+    //logo reset
     logo.textContent= (currTab==='homeTab')? 'To Do App' : clickedTab.textContent;
+    logo.style.removeProperty('--optional-icon');
+    logo.className='';
+
     rightSide.className=currTab;
     renderRightSide();
 }

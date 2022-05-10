@@ -24,7 +24,7 @@ export default function generateNavbarProjects(){
         
         //eventListeners
         projName.addEventListener('click',function(){
-            pubsub.publish('projectSlabClicked');
+            pubsub.publish('individualProjectClicked',id);
         })
         hoverOptions.addEventListener('click',function(event){
             event.stopPropagation();
