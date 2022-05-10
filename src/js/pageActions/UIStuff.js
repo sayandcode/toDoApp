@@ -16,7 +16,7 @@ const navbarProjects=document.getElementById('projectsTab').parentElement;
 const projectsTab=document.getElementById('projectsTab');
 
 //initialize
-renderRightSide();
+switchTab(currTab);
 
 //listening
 FAB.addEventListener('click',newTaskModal);
@@ -25,7 +25,7 @@ newProjectFromNav.addEventListener('keydown',function(e){
         pubsub.publish('openProjectModal',this);
 });
 tabs.forEach(tab=>tab.addEventListener('click',function(){
-    switchTab(this)
+    switchTab(this.id)
 }));
 pubsub.subscribe('individualProjectClicked',(id)=>{
     currTab='individualProject';
@@ -39,13 +39,6 @@ pubsub.subscribe('openProjectModal',newProjectModalFor);
 
 
 function renderRightSide(id){
-    //logo reset
-    logo.textContent= (currTab==='homeTab')? 'To Do App' : document.getElementById(currTab).textContent;
-    logo.style.removeProperty('--optional-icon');
-    logo.className='';
-
-    rightSide.className=currTab;
-
     rightSide.innerHTML='';
     rightSide.append(renderMethods[currTab](id));     //render new stuff
 };
@@ -64,10 +57,17 @@ function renderNavbarProjects(){
 }
 
 function switchTab(clickedTab){
-    if(currTab===clickedTab.id)
-        return;
+    // if(currTab===clickedTab.id)  //not needed for some reason
+    //     return;
 
-    currTab=clickedTab.id;
+    currTab=clickedTab;
+
+    //logo reset
+    logo.textContent= (currTab==='homeTab')? 'To Do App' : document.getElementById(currTab).textContent;
+    logo.style.removeProperty('--optional-icon');
+    logo.className='';
+
+    rightSide.className=currTab;
     
     renderRightSide();
 }
