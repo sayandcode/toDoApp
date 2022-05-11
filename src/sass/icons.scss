@@ -3,7 +3,8 @@ $icon-width:1.5em;
 .icon::before,.icon::after,
 .projectSlab::marker,
 .hoverOptions::after,
-.checkbox::before{
+.checkbox::before,
+.navigate2diffSection::after{
     display: inline-block;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;

@@ -25,7 +25,7 @@ newProjectFromNav.addEventListener('keydown',function(e){
         pubsub.publish('openProjectModal',this);
 });
 tabs.forEach(tab=>tab.addEventListener('click',function(){
-    switchTab(this.id)
+    pubsub.publish('tabSwitched',this.id)
 }));
 pubsub.subscribe('individualProjectClicked',(id)=>{
     currTab='individualProject';
@@ -36,6 +36,7 @@ pubsub.subscribe('projectsChanged',renderNavbarProjects);
 pubsub.subscribe('projectsChanged',renderRightSide);
 pubsub.subscribe('hoverOptionsClicked',showContextMenu);
 pubsub.subscribe('openProjectModal',newProjectModalFor);
+pubsub.subscribe('tabSwitched',switchTab);
 
 
 function renderRightSide(id){

@@ -22,8 +22,17 @@ const homePage= function(){
 
         const displayedTasks=allTasks.slice(0,2);
         
-        if(displayedTasks.length!==0)
+        if(displayedTasks.length!==0){
             taskSection.appendChild(createTaskGroups.generate(displayedTasks));
+            
+            //add a link to all tasks
+            const home2allTasks=document.createElement('h2');
+            home2allTasks.classList.add('navigate2diffSection','icon');
+            home2allTasks.id='home2allTasks';
+            home2allTasks.addEventListener('click',()=>pubsub.publish('tabSwitched','allTasksTab'));
+            home2allTasks.textContent='All Tasks';
+            taskSection.appendChild(home2allTasks);
+        }
     }
     result.appendChild(taskSection);
     /* TASK SECTION END*/
@@ -38,6 +47,8 @@ const homePage= function(){
             return result;  //result contains only task section at this point
     
         projectSection.appendChild(template2Node(homePageProjectSectionTemplate));
+
+        projectSection.querySelector('#home2projects').addEventListener('click',()=>pubsub.publish('tabSwitched','projectsTab'));
     
         const projectCards=projectSection.querySelector('.projectCards');
         for(const project of Object.values(allProjects)){
