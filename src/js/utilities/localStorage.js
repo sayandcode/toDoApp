@@ -30,7 +30,7 @@ const storage=(function(){
         const storedAllTasks=JSON.parse(localStorage.getItem('allTasks'));
         if (storedAllTasks)
             for(const task of Object.values(storedAllTasks)){
-                task.taskDate=new Date(task.taskDate);
+                task.date=new Date(task.date);
             }
         return storedAllTasks;
     }

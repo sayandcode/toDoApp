@@ -44,7 +44,8 @@ export default class Project{
             'name':this.#projectName,
             'icon':this.#projectIcon,
             'id':this.#projectID,
-            'tasks':this.#tasks
+            // No need to add tasks of project, since the task knows its parent project, and will
+            //add itself during its init
         };
     }
 

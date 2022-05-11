@@ -7,11 +7,11 @@ function fixFormsBug(e){
 
 function createTaskFromInputs(event){
     fixFormsBug(event);
-    const taskName=document.getElementById('taskName').value;
-    const taskDate=new Date(document.getElementById('taskDateTime').value);
+    const name=document.getElementById('taskName').value;
+    const date=new Date(document.getElementById('taskDateTime').value);
     const projectID=document.getElementById('chooseProject').value;
 
-    return {taskName,taskDate,projectID}
+    return {name,date,projectID}
 }
 
 function createProjectFromInputs(event){

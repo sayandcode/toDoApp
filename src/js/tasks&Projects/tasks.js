@@ -89,12 +89,13 @@ class Task{
     #projectID;
     #done;
 
-    constructor({taskName,taskDate,projectID,taskID,done}){
-        this.#taskName=taskName;
-        this.#taskDate=taskDate;
+    constructor({name,date,projectID,taskID,done}){
+        this.#taskName=name;
+        this.#taskDate=date;
         this.#taskID=taskID?taskID:uuid();
         if(projectID){
             this.#projectID=projectID;
+            console.log(Project.findById(projectID))
             Project.findById(projectID).addTask(this);
         }
         this.#done=done?done:false;
@@ -103,8 +104,8 @@ class Task{
 
     toJSON(){
         return {
-            'taskName':this.#taskName,
-            'taskDate':this.#taskDate,
+            'name':this.#taskName,
+            'date':this.#taskDate,
             'taskID':this.#taskID,
             'projectID':this.#projectID,
             'done':this.#done
