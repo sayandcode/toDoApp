@@ -21,16 +21,31 @@
         align-items: center;
         justify-items: center;
         grid-template-areas: 
-            "projectName projectName"
+            "topLine topLine"
             "noOfTasks nextDeadline";
         
-        .projectName{grid-area: projectName;}
+        .topLine{grid-area: topLine;}
         .noOfTasks{grid-area: noOfTasks;}
         .nextDeadline{grid-area: nextDeadline;}
 
-        .projectName{
-            cursor: pointer;
+        .topLine{
+            justify-self: stretch;
+            position: relative;
+            text-align: center;
+            
+            .projectName{
+                cursor: pointer;
+                display: inline;
+            }
+    
+            .hoverOptions{
+                position: absolute;
+                right: 0;    
+            }
+        
         }
+
+        
 
         transition: box-shadow 0.2s;
         &:hover{

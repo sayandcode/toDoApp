@@ -48,7 +48,10 @@ const homePage= function(){
     
         projectSection.appendChild(template2Node(homePageProjectSectionTemplate));
 
-        projectSection.querySelector('#home2projects').addEventListener('click',()=>pubsub.publish('tabSwitched','projectsTab'));
+        projectSection.querySelector('#home2projects')
+            .addEventListener('click',()=>
+                pubsub.publish('tabSwitched','projectsTab'));
+        
     
         const projectCards=projectSection.querySelector('.projectCards');
         for(const project of Object.values(allProjects)){
@@ -64,6 +67,11 @@ const homePage= function(){
     
             //add event listeners
             projectName.addEventListener('click',()=>pubsub.publish('individualProjectClicked',project.id));
+            projectCard.querySelector('.hoverOptions')
+                .addEventListener('click',function(event){
+                    event.stopPropagation();
+                    pubsub.publish('hoverOptionsClicked',[project.id,this]);
+                })
     
             projectCards.appendChild(projectCard);
         }
