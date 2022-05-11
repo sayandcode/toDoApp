@@ -3,7 +3,6 @@ import pubsub from '../pageActions/pubsub.js';
 import { v4 as uuid } from 'uuid';
 import Project from './projects.js';
 import '../utilities/Custom Object Functions.js';
-import storage from '../utilities/localStorage.js';
 
 
 class TaskList{
@@ -129,9 +128,9 @@ class Task{
     }
 
     delete(){
-        Task.#remove(this);
         if(this.#projectID)
             Project.findById(this.#projectID).removeTask(this);
+        Task.#remove(this);
         pubsub.publish('tasksChanged');
     }
 
@@ -145,18 +144,3 @@ export {
     Task,
     TaskList
 }
-
-/* LOCAL STORAGE STUFF */
-// first search local Storage for previously stored allTasks
-const storedAllTasks=storage.findAllTasks();
-
-//if it exists, add every task in there to the current Task.#AllTasks object, by initializing each task
-if (storedAllTasks)
-    for(const task of Object.values(storedAllTasks)){
-        task.taskDate=new Date(task.taskDate);
-        new Task(task);
-    }
-
-pubsub.subscribe('updateAllTasksInStorage',storage.storeAllTasks);  
-
-/* LOCAL STORAGE STUFF */

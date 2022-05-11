@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import pubsub from '../pageActions/pubsub';
+import storage from '../utilities/localStorage';
 import { TaskList } from './tasks';
 
 export default class Project{
@@ -13,6 +14,12 @@ export default class Project{
         return Object.assign({},this.#AllProjects);
     }
 
+    static #add(project){
+        Project.#AllProjects[project.id]=project;
+        pubsub.publish('projectsChanged');
+        pubsub.publish('updateAllProjectsInStorage',Project.#AllProjects)
+    }
+
     static remove(project){
         delete this.#AllProjects[project.id];
         pubsub.publish('projectsChanged');
@@ -23,14 +30,22 @@ export default class Project{
     #projectID;
     #tasks;
 
-    constructor(name,icon){
+    constructor({name,icon,id}){
         this.#projectName=name;
         this.#projectIcon=icon;
-        this.#projectID=uuid();
+        this.#projectID=id?id:uuid();
         this.#tasks=new TaskList();
 
-        Project.#AllProjects[this.#projectID]=this;
-        pubsub.publish('projectsChanged');
+        Project.#add(this);
+    }
+
+    toJSON(){
+        return {
+            'name':this.#projectName,
+            'icon':this.#projectIcon,
+            'id':this.#projectID,
+            'tasks':this.#tasks
+        };
     }
 
     get name(){
@@ -57,16 +72,16 @@ export default class Project{
         delete this.#tasks[task.id];
     }
 
-    edit(name,icon){
+    edit({name,icon}){
         this.#projectName=name;
         this.#projectIcon=icon;
         pubsub.publish('projectsChanged');
     }
 
     delete(){
-        Project.remove(this);
         for (const id in this.#tasks){
             this.#tasks[id].delete();
         }
+        Project.remove(this);
     }
 }

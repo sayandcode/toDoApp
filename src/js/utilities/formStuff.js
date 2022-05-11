@@ -18,9 +18,9 @@ function createProjectFromInputs(event){
     fixFormsBug(event);
     const name=document.getElementById('projName').value;
     const selectedIcon=document.querySelector('input[type="radio"][name="iconSelector"]:checked');
-    const iconHex=selectedIcon?selectedIcon.value:'f0ae';
+    const icon=selectedIcon?selectedIcon.value:'f0ae';
     
-    return [name,iconHex];
+    return {name,icon};
 }
 
 export{

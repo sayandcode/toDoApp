@@ -77,9 +77,9 @@ export default function newProjectModal(){
     function createOrEditProject(event){
         const userInputs=createProjectFromInputs(event);
         if(!project)
-            new Project(...userInputs);
+            new Project(userInputs);
         else
-            project.edit(...userInputs);
+            project.edit(userInputs);
         closeModal();
     }
 }

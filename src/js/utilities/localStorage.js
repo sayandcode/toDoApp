@@ -25,20 +25,39 @@ const storage=(function(){
         }
     }
 
+    /* TASKS */
     function findAllTasks(){
-        return JSON.parse(localStorage.getItem('allTasks'));
+        const storedAllTasks=JSON.parse(localStorage.getItem('allTasks'));
+        if (storedAllTasks)
+            for(const task of Object.values(storedAllTasks)){
+                task.taskDate=new Date(task.taskDate);
+            }
+        return storedAllTasks;
     }
 
     function storeAllTasks(allTasks){
         localStorage.allTasks=JSON.stringify(allTasks);
     }
+    /* TASKS */
 
+    /* PROJECTS */
+    function findAllProjects(){
+        const storedProjects= JSON.parse(localStorage.getItem('allProjects'));
+        return storedProjects;
+    }
+
+    function storeAllProjects(allProjects){
+        localStorage.allProjects=JSON.stringify(allProjects);
+    }
+    /* PROJECTS */
     
     
     return {
         isAvailable,
         findAllTasks,
-        storeAllTasks
+        storeAllTasks,
+        findAllProjects,
+        storeAllProjects
     }
 })();
 
