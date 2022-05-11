@@ -17,10 +17,9 @@ export default class Project{
     static #add(project){
         Project.#AllProjects[project.id]=project;
         pubsub.publish('projectsChanged');
-        pubsub.publish('updateAllProjectsInStorage',Project.#AllProjects)
     }
 
-    static remove(project){
+    static #remove(project){
         delete this.#AllProjects[project.id];
         pubsub.publish('projectsChanged');
     }
@@ -83,6 +82,6 @@ export default class Project{
         for (const id in this.#tasks){
             this.#tasks[id].delete();
         }
-        Project.remove(this);
+        Project.#remove(this);
     }
 }

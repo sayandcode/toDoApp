@@ -17,7 +17,7 @@ if (storedAllProjects)
     }
 
 //when project is updated internally, update in the storage
-pubsub.subscribe('updateAllProjectsInStorage',storage.storeAllProjects);  
+pubsub.subscribe('projectsChanged',()=>storage.storeAllProjects(Project.all));  
 /* PROJECTS LOAD END*/
 
 /* TASKS LOAD START */
@@ -30,5 +30,5 @@ if (storedAllTasks)
     for(const task of Object.values(storedAllTasks))
         new Task(task);    
 
-pubsub.subscribe('updateAllTasksInStorage',storage.storeAllTasks);
+pubsub.subscribe('tasksChanged',()=>storage.storeAllTasks(Task.all));
 /* TASKS LOAD END */

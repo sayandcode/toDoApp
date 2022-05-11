@@ -74,13 +74,12 @@ class Task{
 
     static #add(task){
         Task.#AllTasks.insertChronologically(task);
-        pubsub.publish('updateAllTasksInStorage',Task.#AllTasks)
         pubsub.publish('tasksChanged');
     }
 
     static #remove(task){
         delete this.#AllTasks[task.id];
-        pubsub.publish('updateAllTasksInStorage',Task.#AllTasks)
+        pubsub.publish('tasksChanged');
     }
 
     #taskName;    
@@ -132,12 +131,11 @@ class Task{
         if(this.#projectID)
             Project.findById(this.#projectID).removeTask(this);
         Task.#remove(this);
-        pubsub.publish('tasksChanged');
     }
 
     toggleDone(){
         this.#done= !this.#done;
-        pubsub.publish('updateAllTasksInStorage',Task.all)
+        pubsub.publish('tasksChanged');
     }
 }
 
