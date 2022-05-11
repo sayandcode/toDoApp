@@ -2,7 +2,7 @@ const path=require('path');
 const HtmlWebpackPlugin= require('html-webpack-plugin');
 
 module.exports={
-    mode:'development',
+    mode:'production',
     entry:{
         bundle:path.resolve(__dirname,'src/js/index.js')
     },
@@ -10,7 +10,6 @@ module.exports={
         path:path.resolve(__dirname,'dist'),
         filename:'[name].js',
         assetModuleFilename: 'images/[hash][ext][query]',
-        clean:true
     },
     devServer:{
         static:path.resolve(__dirname,'dist'),

@@ -46,7 +46,7 @@ export default function newProjectModal(){
             this.value='';  //clear the nav input box
             break;
 
-        case 'Project':
+        case Project.name:
             var project=this;
             projName.value=this.name;
             const selectedIcon=iconSelector.querySelector(`input[value="${this.icon}"]`);
