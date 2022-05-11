@@ -11,48 +11,61 @@ import pubsub from "../pageActions/pubsub";
 const homePage= function(){
     const result=document.createDocumentFragment()
 
+    /* TASK SECTION START*/
     //find and show if there are any tasks
-    const allTasks=TaskList.groupByDate(Task.all);
-    const indexOfPast=allTasks.findIndex(element=>element.name==='In the Past');
-    if(indexOfPast!==-1)
-        allTasks.splice(indexOfPast,1);
+    const taskSection=document.createDocumentFragment();
+    {
+        const allTasks=TaskList.groupByDate(Task.all);
+        const indexOfPast=allTasks.findIndex(element=>element.name==='In the Past');
+        if(indexOfPast!==-1)
+            allTasks.splice(indexOfPast,1);
 
-    const displayedTasks=allTasks.slice(0,2);
-    
-    if(displayedTasks.length!==0)
-        result.appendChild(createTaskGroups.generate(displayedTasks));
-    
-    //find and show if there are any projects, otherwise return ''
-    const allProjects=Project.all;
-    if(Object.keys(allProjects).length===0)
-        return result;
-
-    result.appendChild(template2Node(homePageProjectSectionTemplate));
-
-    const projectCards=result.querySelector('.projectCards');
-    for(const project of Object.values(allProjects)){
-        const projectCard=template2Node(projectCardTemplate);
-
-        //cacheDOM
-        const projectName=projectCard.querySelector('.projectName');
+        const displayedTasks=allTasks.slice(0,2);
         
-        //enter values
-        projectName.textContent=project.name;
-        projectCard.querySelector('.noOfTasks').textContent=`${findRemainingTasks(project)} tasks left`;
-        projectCard.querySelector('.nextDeadline').textContent=findNextDeadline(project);
-
-        //add event listeners
-        projectName.addEventListener('click',()=>pubsub.publish('individualProjectClicked',project.id));
-
-        projectCards.appendChild(projectCard);
+        if(displayedTasks.length!==0)
+            taskSection.appendChild(createTaskGroups.generate(displayedTasks));
     }
+    result.appendChild(taskSection);
+    /* TASK SECTION END*/
 
-    //add 'new Project card' to end of projectCards
-    const newProjCard=document.createElement('div');
-    newProjCard.textContent='New Project ➕';
-    newProjCard.className='newProjectCard';
-    newProjCard.addEventListener('click',()=>pubsub.publish('openProjectModal',this));
-    projectCards.appendChild(newProjCard);
+
+    /* PROJECT SECTION START*/
+    //find and show if there are any projects, otherwise return ''
+    const projectSection=document.createDocumentFragment();
+    {
+        const allProjects=Project.all;
+        if(Object.keys(allProjects).length===0)
+            return result;  //result contains only task section at this point
+    
+        projectSection.appendChild(template2Node(homePageProjectSectionTemplate));
+    
+        const projectCards=projectSection.querySelector('.projectCards');
+        for(const project of Object.values(allProjects)){
+            const projectCard=template2Node(projectCardTemplate);
+    
+            //cacheDOM
+            const projectName=projectCard.querySelector('.projectName');
+            
+            //enter values
+            projectName.textContent=project.name;
+            projectCard.querySelector('.noOfTasks').textContent=`${findRemainingTasks(project)} tasks left`;
+            projectCard.querySelector('.nextDeadline').textContent=findNextDeadline(project);
+    
+            //add event listeners
+            projectName.addEventListener('click',()=>pubsub.publish('individualProjectClicked',project.id));
+    
+            projectCards.appendChild(projectCard);
+        }
+    
+        //add 'new Project card' to end of projectCards
+        const newProjCard=document.createElement('div');
+        newProjCard.textContent='New Project ➕';
+        newProjCard.className='newProjectCard';
+        newProjCard.addEventListener('click',()=>pubsub.publish('openProjectModal',this));
+        projectCards.appendChild(newProjCard);
+    }
+    result.appendChild(projectSection);
+    /* PROJECT SECTION END*/
 
     //and finally return the result
     return result;
@@ -67,13 +80,11 @@ function findRemainingTasks(project){
 }
 
 function findNextDeadline(project){
-    console.log(Object.values(project.tasks))
     const taskDates=Object.values(project.tasks).reduce((comingDates,task)=>{
         if ( isFuture(task.date) && !task.status )
             comingDates.push(task.date);
         return comingDates;
     },[]);
-    console.log(taskDates);
     if(taskDates.length===0)
         return 'No deadlines';
     
