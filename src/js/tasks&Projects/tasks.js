@@ -2,7 +2,9 @@ import { isPast, isThisMonth, isThisWeek, isThisYear, isToday, isTomorrow } from
 import pubsub from '../pageActions/pubsub.js';
 import { v4 as uuid } from 'uuid';
 import Project from './projects.js';
-import '../utilities/Custom Object Functions.js'
+import '../utilities/Custom Object Functions.js';
+import storage from '../utilities/localStorage.js';
+
 
 class TaskList{
 
@@ -37,7 +39,7 @@ class TaskList{
             value: uuid(),
             writable: false,
             enumerable: false,
-        })
+        });
     }
 
     insertChronologically(currTask){
@@ -47,10 +49,20 @@ class TaskList{
             this[currTask.id]=currTask;
         else
             this.splice(insertPosition,0,[currTask.id,currTask]);
+        pubsub.publish('taskListUpdated',this);
+    }
+
+    toJSON(){
+        const result={};
+        for(const [taskID,task] of Object.entries(this)){
+            result[taskID]=task.toJSON();
+        }
+        return result
     }
 }
 
 class Task{
+    
     static #AllTasks=new TaskList();
 
     static findById(id){
@@ -61,27 +73,43 @@ class Task{
         return Object.assign({},this.#AllTasks);
     }
 
-    static remove(task){
+    static #add(task){
+        Task.#AllTasks.insertChronologically(task);
+        pubsub.publish('updateAllTasksInStorage',Task.#AllTasks)
+        pubsub.publish('tasksChanged');
+    }
+
+    static #remove(task){
         delete this.#AllTasks[task.id];
+        pubsub.publish('updateAllTasksInStorage',Task.#AllTasks)
     }
 
     #taskName;    
     #taskDate;
     #taskID;
-    #projID;
-    #done=false;
+    #projectID;
+    #done;
 
-    constructor(name,date,projID){
-        this.#taskName=name;
-        this.#taskDate=date;
-        this.#taskID=uuid();
-        if(projID){
-            this.#projID=projID;
-            Project.findById(projID).addTask(this);
+    constructor({taskName,taskDate,projectID,taskID,done}){
+        this.#taskName=taskName;
+        this.#taskDate=taskDate;
+        this.#taskID=taskID?taskID:uuid();
+        if(projectID){
+            this.#projectID=projectID;
+            Project.findById(projectID).addTask(this);
         }
-        
-        Task.#AllTasks.insertChronologically(this);
-        pubsub.publish('tasksChanged');
+        this.#done=done?done:false;
+        Task.#add(this)
+    }
+
+    toJSON(){
+        return {
+            'taskName':this.#taskName,
+            'taskDate':this.#taskDate,
+            'taskID':this.#taskID,
+            'projectID':this.#projectID,
+            'done':this.#done
+        };
     }
 
     get date(){
@@ -101,14 +129,15 @@ class Task{
     }
 
     delete(){
-        Task.remove(this);
-        if(this.#projID)
-            Project.findById(this.#projID).removeTask(this);
+        Task.#remove(this);
+        if(this.#projectID)
+            Project.findById(this.#projectID).removeTask(this);
         pubsub.publish('tasksChanged');
     }
 
     toggleDone(){
         this.#done= !this.#done;
+        pubsub.publish('updateAllTasksInStorage',Task.all)
     }
 }
 
@@ -117,3 +146,17 @@ export {
     TaskList
 }
 
+/* LOCAL STORAGE STUFF */
+// first search local Storage for previously stored allTasks
+const storedAllTasks=storage.findAllTasks();
+
+//if it exists, add every task in there to the current Task.#AllTasks object, by initializing each task
+if (storedAllTasks)
+    for(const task of Object.values(storedAllTasks)){
+        task.taskDate=new Date(task.taskDate);
+        new Task(task);
+    }
+
+pubsub.subscribe('updateAllTasksInStorage',storage.storeAllTasks);  
+
+/* LOCAL STORAGE STUFF */

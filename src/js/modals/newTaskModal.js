@@ -50,7 +50,7 @@ export default function newTaskModal(){
 
     function createTask(event){
         const userInputs=createTaskFromInputs(event);
-        new Task(...userInputs);
+        new Task(userInputs);
         closeModal();
     }
 }
