@@ -1,4 +1,9 @@
 # toDoApp
-Basic To-Do List App
+Basic To-Do List App. Supports persistent local storage.
 
-Supports Persistent Local Storage
+## Technologies Used:
+  - HTML
+  - CSS(SCSS preprocessor)
+  - Vanilla JS(No external frameworks used)
+  - Node Package Manager
+  - Webpack Module Bundler
