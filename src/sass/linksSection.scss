@@ -1,0 +1,22 @@
+#linksSection {
+  margin-top: auto;
+  align-self: center;
+  margin-bottom: 1rem;
+
+}
+
+#portfolioLink{
+  text-decoration: none;
+  color: $darkColor;
+}
+
+#linkIcons {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  column-gap: 1em;
+
+  a>img{
+    height: 25px;
+  }
+}
