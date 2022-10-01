@@ -1,27 +1,27 @@
-const path=require('path');
-const HtmlWebpackPlugin= require('html-webpack-plugin');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports={
-    mode:'production',
-    entry:{
-        bundle:path.resolve(__dirname,'src/js/index.js')
+module.exports = {
+    mode: 'production',
+    entry: {
+        bundle: path.resolve(__dirname, 'src/js/index.js')
     },
-    output:{
-        path:path.resolve(__dirname,'dist'),
-        filename:'[name].js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].js',
         assetModuleFilename: 'images/[hash][ext][query]',
     },
-    devServer:{
-        static:path.resolve(__dirname,'dist'),
-        port:3000,
-        open:true,
-        hot:true
+    devServer: {
+        static: path.resolve(__dirname, 'dist'),
+        port: 3000,
+        open: true,
+        hot: true
     },
-    module:{
-        rules:[
+    module: {
+        rules: [
             {
-                test:/\.scss$/,
-                use:['style-loader','css-loader','sass-loader']
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.html$/i,
@@ -33,10 +33,11 @@ module.exports={
             },
         ]
     },
-    plugins:[
+    plugins: [
         new HtmlWebpackPlugin({
-            filename:'index.html',
-            template: path.resolve(__dirname,'src/indexTemplate.html')
-        })
+            favicon: path.resolve(__dirname, 'public/favicon.ico'),
+            filename: 'index.html',
+            template: path.resolve(__dirname, 'src/indexTemplate.html')
+        }),
     ]
 }
